@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-004
+Sample: smp-2026-00072
+Subject: SUBJ-0051
+Analyte: UREA - Urea
+Result: 27.42 MG/DL
+QC: PASS
+Run time: 04/03/2026 18:00
+Reviewer: ALPHA
+Notes: unit was typed manually

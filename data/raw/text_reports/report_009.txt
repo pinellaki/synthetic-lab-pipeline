@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-009
+Sample: SMP-2026-00066
+Subject: SUBJ-0055
+Analyte: CREA - Creatinine
+Result: 1.01 mg dl
+QC: PASS
+Run time: 2026-03-08 22:00
+Reviewer: CHARLIE
+Notes: standard extraction

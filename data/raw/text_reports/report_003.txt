@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-003
+Sample: SMP-2026-00092
+Subject: SUBJ-0027
+Analyte: NA - Sodium
+Result: 138.81 mmol per L
+QC: PASS
+Run time: 2026-01-30 01:00
+Reviewer: BRAVO
+Notes: standard extraction

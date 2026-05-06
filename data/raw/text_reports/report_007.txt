@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-007
+Sample: SMP-2026-00020
+Subject: SUBJ-0004
+Analyte: CREA - Creatinine
+Result: 0.78 mg_per_dl
+QC: FAIL
+Run time: 28/03/2026 21:00
+Reviewer: CHARLIE
+Notes: manual note: barcode faint

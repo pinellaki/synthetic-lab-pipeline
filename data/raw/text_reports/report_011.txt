@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-011
+Sample: SMP-2026-00098
+Subject: SUBJ-0045
+Analyte: ALT - Alanine aminotransferase
+Result: 27.36 units/L
+QC: FAIL
+Run time: 15/01/2026 23:00
+Reviewer: ALPHA
+Notes: standard extraction

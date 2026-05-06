@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-012
+Sample: smp-2026-00042
+Subject: SUBJ-0024
+Analyte: K - Potassium
+Result: 4.74 mmol/L
+QC: REVIEW
+Run time: 2026-02-06 18:00
+Reviewer: CHARLIE
+Notes: unit was typed manually
