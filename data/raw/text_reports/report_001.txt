@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-001
+Sample: SMP-2026-00142
+Subject: SUBJ-0035
+Analyte: NA - Sodium
+Result: 137.27 mmol per L
+QC: REVIEW
+Run time: 10/03/2026 19:00
+Reviewer: ALPHA
+Notes: unit was typed manually

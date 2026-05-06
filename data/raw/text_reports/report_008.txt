@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-008
+Sample: smp-2026-00141
+Subject: SUBJ-0019
+Analyte: NA - Sodium
+Result: 140.87 MMOL/L
+QC: FAIL
+Run time: 16/03/2026 01:00
+Reviewer: BRAVO
+Notes: manual note: barcode faint

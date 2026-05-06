@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-002
+Sample: SMP-2026-00056
+Subject: SUBJ-0011
+Analyte: CRP - C-reactive protein
+Result: 3.51 mg l
+QC: OK
+Run time: 22/03/2026 02:00
+Reviewer: ALPHA
+Notes: unit was typed manually

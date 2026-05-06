@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-005
+Sample: SMP-2026-00033
+Subject: SUBJ-0018
+Analyte: K - Potassium
+Result: 3.96 mmol per L
+QC: PASS
+Run time: 21/02/2026 01:00
+Reviewer: ALPHA
+Notes: manual note: barcode faint

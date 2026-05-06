@@ -1,0 +1,43 @@
+batch_id,compound_code,supplier,lot_number,concentration,concentration_unit,received_date,expiration_date,active,deleted_at,notes
+BATCH-0001,CMP-D4,BioSynth,LOT-6959,1.0,MG/ML,2026-01-16,21/09/2026,true,,
+BATCH-0002,CMP-B2,LabSource,LOT-5698,"0,25",MG/ML,11/01/2026,04/09/2026,yes,,manual concentration entry
+BATCH-0003,CMP-F6,BioSynth,LOT-9677,5.0,MG/ML,18/01/2026,14/09/2026,TRUE,,ok
+BATCH-0004,CMP-G7,NorthChem,LOT-8251,0.5,mg/mL,2026-03-08,22/06/2026,1,,manual concentration entry
+BATCH-0005,CMP-D4,ACME Reagents,LOT-2007,5.0,mg/mL,2026-03-26,2027-01-18,TRUE,,unit needs review
+BATCH-0006,CMP-C3,ACME Reagents,LOT-5986,,ug/mL,2026-02-14,29/12/2026,yes,,unit needs review
+BATCH-0007,CMP-E5,ACME Reagents,LOT-8310,,MG/ML,11/03/2026,26/11/2026,TRUE,,ok
+BATCH-0008,CMP-G7,LabSource,LOT-2380,0.1,,12/02/2026,2026-12-03,TRUE,,unit needs review
+BATCH-0009,CMP-E5,BioSynth,LOT-2520,"0,25",,09/02/2026,2026-12-11,1,,
+BATCH-0010,CMP-A1,BioSynth,LOT-5979,,µg/mL,2026-03-06,2026-12-05,1,,manual concentration entry
+BATCH-0011,CMP-C3,NorthChem,LOT-1782,-1,mg/mL,27/02/2026,2026-10-25,1,,ok
+BATCH-0012,CMP-C3,BioSynth,LOT-6739,1.0,ug/mL,2026-03-27,30/11/2026,TRUE,,unit needs review
+BATCH-0013,CMP-F6,NorthChem,LOT-6371,"0,25",,25/01/2026,2026-09-25,TRUE,,label damaged
+BATCH-0014,CMP-F6,ACME Reagents,LOT-2342,0.1,mg/mL,2026-02-24,2026-09-30,yes,,ok
+BATCH-0015,CMP-A1,ACME Reagents,LOT-9502,-1,µg/mL,03/02/2026,10/11/2026,1,,ok
+BATCH-0016,CMP-F6,ACME Reagents,LOT-3668,0.5,,17/01/2026,30/11/2026,yes,,label damaged
+BATCH-0017,CMP-F6,BioSynth,LOT-8461,5.0,mg/mL,21/01/2026,2027-01-22,true,,unit needs review
+BATCH-0018,CMP-G7,NorthChem,LOT-2980,1.0,,2026-02-07,2026-10-12,yes,,
+BATCH-0019,CMP-C3,LabSource,LOT-5968,1.0,µg/mL,2026-01-04,07/07/2026,1,,
+BATCH-0020,CMP-C3,BioSynth,LOT-3999,-1,µg/mL,2026-01-01,19/10/2026,1,,
+BATCH-0021,CMP-G7,ACME Reagents,LOT-8883,"0,25",ug/mL,14/03/2026,17/01/2027,true,,ok
+BATCH-0022,CMP-D4,BioSynth,LOT-9270,,µg/mL,27/02/2026,09/07/2026,TRUE,,
+BATCH-0023,CMP-G7,ACME Reagents,LOT-4814,5.0,ug/mL,2026-03-11,19/11/2026,yes,,manual concentration entry
+BATCH-0024,CMP-F6,BioSynth,LOT-1406,"0,25",ug/mL,2026-03-13,2026-11-12,true,,label damaged
+BATCH-0025,CMP-E5,BioSynth,LOT-8796,"0,25",mg/mL,2026-01-16,05/06/2026,true,,label damaged
+BATCH-0026,CMP-B2,NorthChem,LOT-9741,"0,25",ug/mL,2026-02-21,2026-10-04,false,2026-03-15,manual concentration entry
+BATCH-0027,CMP-D4,ACME Reagents,LOT-1394,-1,,10/02/2026,2026-08-05,TRUE,,
+BATCH-0028,CMP-A1,LabSource,LOT-3359,0.5,ug/mL,2026-01-12,18/08/2026,TRUE,,label damaged
+BATCH-0029,CMP-A1,BioSynth,LOT-1445,,mg/mL,08/02/2026,26/06/2026,1,,label damaged
+BATCH-0030,CMP-D4,LabSource,LOT-7152,-1,mg/mL,2026-01-07,2026-08-01,1,,ok
+BATCH-0031,CMP-E5,NorthChem,LOT-5412,0.1,ug/mL,01/03/2026,17/06/2026,yes,,
+BATCH-0032,CMP-D4,NorthChem,LOT-5409,"0,25",,2026-03-28,2026-08-03,TRUE,,manual concentration entry
+BATCH-0033,CMP-E5,ACME Reagents,LOT-2374,-1,,2026-01-27,2026-09-04,yes,,label damaged
+BATCH-0034,CMP-E5,ACME Reagents,LOT-1684,0.1,µg/mL,21/03/2026,2026-11-15,yes,,
+BATCH-0035,CMP-A1,LabSource,LOT-5110,-1,µg/mL,2026-02-14,28/10/2026,yes,,
+BATCH-0036,CMP-B2,LabSource,LOT-2469,5.0,mg/mL,18/01/2026,11/01/2027,true,,label damaged
+BATCH-0037,CMP-E5,LabSource,LOT-5282,-1,µg/mL,2026-02-04,17/11/2026,1,,manual concentration entry
+BATCH-0038,CMP-B2,LabSource,LOT-1260,,MG/ML,2026-03-24,03/11/2026,yes,,
+BATCH-0039,CMP-A1,ACME Reagents,LOT-9011,-1,µg/mL,2026-03-10,2026-12-19,TRUE,,unit needs review
+BATCH-0040,CMP-A1,NorthChem,LOT-6783,-1,µg/mL,18/03/2026,2026-09-08,yes,,
+BATCH-0041,CMP-A1,LabSource,LOT-4161,5.0,mg/mL,2026-01-29,12/12/2026,yes,,manual concentration entry
+BATCH-0042,CMP-B2,LabSource,LOT-4623,0.5,µg/mL,2026-02-16,11/08/2026,true,,unit needs review

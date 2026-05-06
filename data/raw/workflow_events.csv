@@ -1,0 +1,751 @@
+event_id,sample_id,event_status,event_timestamp,actor,message
+EVT-000001,SMP-2026-00001,received,2026-03-02 04:00,ALPHA,manual review
+EVT-000002,SMP-2026-00001,queued,2026-03-02 07:00,CHARLIE,retry after validation error
+EVT-000003,SMP-2026-00001,processed,2026-03-03 05:00,ALPHA,automatic transition
+EVT-000004,SMP-2026-00001,reviewed,04/03/2026 12:00,system,retry after validation error
+EVT-000005,SMP-2026-00001,completed,05/03/2026 20:00,ALPHA,manual review
+EVT-000006,SMP-2026-00002,received,2026-02-25 20:00,ALPHA,manual review
+EVT-000007,SMP-2026-00002,queued,2026-02-27 05:00,ALPHA,
+EVT-000008,SMP-2026-00002,processed,28/02/2026 03:00,DELTA,
+EVT-000009,SMP-2026-00002,reviewed,01/03/2026 07:00,BRAVO,manual review
+EVT-000010,SMP-2026-00002,completed,2026-03-02 15:00,CHARLIE,automatic transition
+EVT-000011,SMP-2026-00003,received,2026-01-25 09:00,CHARLIE,automatic transition
+EVT-000012,SMP-2026-00003,queued,2026-01-26 16:00,DELTA,external API update
+EVT-000013,SMP-2026-00003,processed,2026-01-27 04:00,DELTA,automatic transition
+EVT-000014,SMP-2026-00003,reviewed,2026-01-27 19:00,ALPHA,retry after validation error
+EVT-000015,SMP-2026-00003,completed,27/01/2026 22:00,ALPHA,automatic transition
+EVT-000016,SMP-2026-00004,received,28/02/2026 19:00,CHARLIE,external API update
+EVT-000017,SMP-2026-00004,queued,2026-03-01 15:00,ALPHA,manual review
+EVT-000018,SMP-2026-00004,processed,02/03/2026 19:00,system,external API update
+EVT-000019,SMP-2026-00004,reviewed,2026-03-03 23:00,BRAVO,
+EVT-000020,SMP-2026-00004,completed,04/03/2026 17:00,BRAVO,manual review
+EVT-000021,SMP-2026-00005,received,2026-02-27 19:00,system,manual review
+EVT-000022,SMP-2026-00005,processed,28/02/2026 09:00,CHARLIE,manual review
+EVT-000023,SMP-2026-00005,queued,28/02/2026 16:00,ALPHA,manual review
+EVT-000024,SMP-2026-00005,reviewed,02/03/2026 00:00,BRAVO,manual review
+EVT-000025,SMP-2026-00005,completed,2026-03-02 08:00,system,external API update
+EVT-000026,SMP-2026-00006,received,23/01/2026 03:00,ALPHA,manual review
+EVT-000027,SMP-2026-00006,queued,23/01/2026 17:00,system,
+EVT-000028,SMP-2026-00006,processed,2026-01-24 02:00,system,external API update
+EVT-000029,SMP-2026-00006,reviewed,2026-01-24 15:00,CHARLIE,
+EVT-000030,SMP-2026-00006,completed,24/01/2026 20:00,BRAVO,retry after validation error
+EVT-000031,SMP-2026-00007,received,01/02/2026 04:00,DELTA,manual review
+EVT-000032,SMP-2026-00007,queued,02/02/2026 04:00,system,retry after validation error
+EVT-000033,SMP-2026-00007,processed,02/02/2026 09:00,CHARLIE,external API update
+EVT-000034,SMP-2026-00007,reviewed,2026-02-03 18:00,ALPHA,external API update
+EVT-000035,SMP-2026-00007,skipped,2026-02-04 12:00,BRAVO,
+EVT-000036,SMP-2026-00008,received,19/03/2026 17:00,DELTA,external API update
+EVT-000037,SMP-2026-00008,queued,2026-03-19 22:00,CHARLIE,external API update
+EVT-000038,SMP-2026-00008,processed,20/03/2026 23:00,CHARLIE,external API update
+EVT-000039,SMP-2026-00008,reviewed,2026-03-21 17:00,ALPHA,
+EVT-000040,SMP-2026-00008,completed,2026-03-22 04:00,DELTA,
+EVT-000041,SMP-2026-00009,received,12/03/2026 11:00,ALPHA,manual review
+EVT-000042,SMP-2026-00009,queued,2026-03-13 05:00,ALPHA,automatic transition
+EVT-000043,SMP-2026-00009,processed,2026-03-13 08:00,BRAVO,
+EVT-000044,SMP-2026-00009,reviewed,13/03/2026 18:00,ALPHA,manual review
+EVT-000045,SMP-2026-00009,completed,2026-03-13 22:00,ALPHA,external API update
+EVT-000046,SMP-2026-00010,received,20/01/2026 15:00,system,external API update
+EVT-000047,SMP-2026-00010,queued,2026-01-21 08:00,CHARLIE,external API update
+EVT-000048,SMP-2026-00010,processed,22/01/2026 03:00,system,
+EVT-000049,SMP-2026-00010,reviewed,2026-01-23 02:00,BRAVO,automatic transition
+EVT-000050,SMP-2026-00010,completed,2026-01-23 19:00,DELTA,external API update
+EVT-000051,SMP-2026-00011,received,2026-01-20 06:00,CHARLIE,automatic transition
+EVT-000052,SMP-2026-00011,queued,21/01/2026 03:00,ALPHA,external API update
+EVT-000053,SMP-2026-00011,processed,2026-01-22 05:00,CHARLIE,automatic transition
+EVT-000054,SMP-2026-00011,reviewed,23/01/2026 09:00,ALPHA,retry after validation error
+EVT-000055,SMP-2026-00011,completed,23/01/2026 15:00,ALPHA,retry after validation error
+EVT-000056,SMP-2026-00012,received,29/01/2026 04:00,system,manual review
+EVT-000057,SMP-2026-00012,queued,2026-01-29 15:00,CHARLIE,external API update
+EVT-000058,SMP-2026-00012,processed,2026-01-30 04:00,ALPHA,
+EVT-000059,SMP-2026-00012,reviewed,2026-01-31 08:00,CHARLIE,retry after validation error
+EVT-000060,SMP-2026-00012,completed,2026-01-31 15:00,system,external API update
+EVT-000061,SMP-2026-00013,received,2026-01-17 19:00,ALPHA,automatic transition
+EVT-000062,SMP-2026-00013,queued,18/01/2026 01:00,ALPHA,external API update
+EVT-000063,SMP-2026-00013,processed,2026-01-18 02:00,system,external API update
+EVT-000064,SMP-2026-00013,reviewed,2026-01-19 00:00,ALPHA,automatic transition
+EVT-000065,SMP-2026-00013,completed,20/01/2026 07:00,ALPHA,manual review
+EVT-000066,SMP-2026-00014,received,2026-02-17 12:00,system,
+EVT-000067,SMP-2026-00014,processed,17/02/2026 19:00,system,external API update
+EVT-000068,SMP-2026-00014,queued,2026-02-18 22:00,system,automatic transition
+EVT-000069,SMP-2026-00014,reviewed,2026-02-19 00:00,CHARLIE,retry after validation error
+EVT-000070,SMP-2026-00014,completed,19/02/2026 10:00,BRAVO,automatic transition
+EVT-000071,SMP-2026-00015,received,2026-02-24 06:00,BRAVO,manual review
+EVT-000072,SMP-2026-00015,queued,24/02/2026 11:00,system,manual review
+EVT-000073,SMP-2026-00015,processed,2026-02-24 17:00,DELTA,automatic transition
+EVT-000074,SMP-2026-00015,reviewed,25/02/2026 05:00,DELTA,manual review
+EVT-000075,SMP-2026-00015,completed,25/02/2026 17:00,ALPHA,manual review
+EVT-000076,SMP-2026-00016,received,12/02/2026 01:00,BRAVO,
+EVT-000077,SMP-2026-00016,queued,2026-02-12 02:00,ALPHA,manual review
+EVT-000078,SMP-2026-00016,processed,12/02/2026 12:00,CHARLIE,retry after validation error
+EVT-000079,SMP-2026-00016,reviewed,2026-02-12 17:00,DELTA,retry after validation error
+EVT-000080,SMP-2026-00016,completed,2026-02-13 11:00,system,manual review
+EVT-000081,SMP-2026-00017,received,23/01/2026 00:00,CHARLIE,retry after validation error
+EVT-000082,SMP-2026-00017,queued,2026-01-23 22:00,ALPHA,retry after validation error
+EVT-000083,SMP-2026-00017,processed,25/01/2026 01:00,DELTA,external API update
+EVT-000084,SMP-2026-00017,reviewed,2026-01-26 09:00,CHARLIE,
+EVT-000085,SMP-2026-00017,completed,2026-01-27 12:00,system,automatic transition
+EVT-000086,SMP-2026-00018,received,21/02/2026 15:00,ALPHA,
+EVT-000087,SMP-2026-00018,queued,21/02/2026 19:00,BRAVO,automatic transition
+EVT-000088,SMP-2026-00018,processed,22/02/2026 14:00,ALPHA,external API update
+EVT-000089,SMP-2026-00018,reviewed,2026-02-23 17:00,ALPHA,automatic transition
+EVT-000090,SMP-2026-00018,completed,2026-02-23 21:00,system,automatic transition
+EVT-000091,SMP-2026-00019,received,2026-02-22 19:00,DELTA,
+EVT-000092,SMP-2026-00019,queued,2026-02-24 02:00,system,automatic transition
+EVT-000093,SMP-2026-00019,processed,2026-02-25 02:00,system,automatic transition
+EVT-000094,SMP-2026-00019,reviewed,2026-02-25 07:00,DELTA,retry after validation error
+EVT-000095,SMP-2026-00019,completed,2026-02-25 17:00,CHARLIE,automatic transition
+EVT-000096,SMP-2026-00020,received,2026-03-14 22:00,BRAVO,
+EVT-000097,SMP-2026-00020,queued,2026-03-15 08:00,system,external API update
+EVT-000098,SMP-2026-00020,processed,2026-03-15 20:00,system,retry after validation error
+EVT-000099,SMP-2026-00020,reviewed,17/03/2026 00:00,DELTA,manual review
+EVT-000100,SMP-2026-00020,completed,18/03/2026 09:00,ALPHA,retry after validation error
+EVT-000101,SMP-2026-00021,received,2026-01-26 02:00,CHARLIE,external API update
+EVT-000102,SMP-2026-00021,queued,2026-01-26 06:00,CHARLIE,automatic transition
+EVT-000103,SMP-2026-00021,processed,2026-01-27 18:00,CHARLIE,retry after validation error
+EVT-000104,SMP-2026-00021,reviewed,28/01/2026 15:00,CHARLIE,automatic transition
+EVT-000105,SMP-2026-00021,completed,28/01/2026 19:00,CHARLIE,automatic transition
+EVT-000106,SMP-2026-00022,received,2026-02-09 13:00,ALPHA,manual review
+EVT-000107,SMP-2026-00022,queued,2026-02-10 00:00,system,automatic transition
+EVT-000108,SMP-2026-00022,processed,10/02/2026 01:00,ALPHA,external API update
+EVT-000109,SMP-2026-00022,reviewed,2026-02-10 14:00,ALPHA,manual review
+EVT-000110,SMP-2026-00022,skipped,2026-02-10 20:00,DELTA,retry after validation error
+EVT-000111,SMP-2026-00023,received,10/01/2026 16:00,BRAVO,retry after validation error
+EVT-000112,SMP-2026-00023,queued,2026-01-12 01:00,BRAVO,retry after validation error
+EVT-000113,SMP-2026-00023,processed,2026-01-13 00:00,system,manual review
+EVT-000114,SMP-2026-00023,reviewed,2026-01-14 03:00,DELTA,automatic transition
+EVT-000115,SMP-2026-00023,completed,14/01/2026 05:00,CHARLIE,external API update
+EVT-000116,SMP-2026-00024,received,2026-01-09 23:00,ALPHA,automatic transition
+EVT-000117,SMP-2026-00024,queued,2026-01-10 09:00,DELTA,external API update
+EVT-000118,SMP-2026-00024,processed,11/01/2026 19:00,CHARLIE,automatic transition
+EVT-000119,SMP-2026-00024,reviewed,12/01/2026 17:00,BRAVO,external API update
+EVT-000120,SMP-2026-00024,completed,2026-01-13 21:00,CHARLIE,automatic transition
+EVT-000121,SMP-2026-00025,received,2026-02-01 23:00,system,automatic transition
+EVT-000122,SMP-2026-00025,queued,2026-02-02 19:00,CHARLIE,
+EVT-000123,SMP-2026-00025,processed,04/02/2026 01:00,ALPHA,manual review
+EVT-000124,SMP-2026-00025,reviewed,2026-02-04 12:00,BRAVO,external API update
+EVT-000125,SMP-2026-00025,completed,05/02/2026 12:00,system,
+EVT-000126,SMP-2026-00026,received,28/01/2026 11:00,ALPHA,
+EVT-000127,SMP-2026-00026,queued,2026-01-29 19:00,BRAVO,manual review
+EVT-000128,SMP-2026-00026,processed,30/01/2026 21:00,DELTA,automatic transition
+EVT-000129,SMP-2026-00026,reviewed,01/02/2026 02:00,DELTA,external API update
+EVT-000130,SMP-2026-00026,completed,01/02/2026 23:00,system,retry after validation error
+EVT-000131,SMP-2026-00027,received,2026-03-10 21:00,ALPHA,external API update
+EVT-000132,SMP-2026-00027,queued,2026-03-10 22:00,system,manual review
+EVT-000133,SMP-2026-00027,processed,2026-03-11 23:00,DELTA,retry after validation error
+EVT-000134,SMP-2026-00027,reviewed,2026-03-12 04:00,CHARLIE,retry after validation error
+EVT-000135,SMP-2026-00027,completed,12/03/2026 10:00,CHARLIE,retry after validation error
+EVT-000136,SMP-2026-00028,received,15/03/2026 01:00,CHARLIE,automatic transition
+EVT-000137,SMP-2026-00028,queued,16/03/2026 03:00,system,manual review
+EVT-000138,SMP-2026-00028,processed,17/03/2026 01:00,ALPHA,retry after validation error
+EVT-000139,SMP-2026-00028,reviewed,17/03/2026 09:00,CHARLIE,
+EVT-000140,SMP-2026-00028,skipped,2026-03-18 20:00,CHARLIE,automatic transition
+EVT-000141,SMP-2026-00029,received,2026-02-02 18:00,BRAVO,retry after validation error
+EVT-000142,SMP-2026-00029,queued,2026-02-04 01:00,system,automatic transition
+EVT-000143,SMP-2026-00029,processed,04/02/2026 03:00,BRAVO,manual review
+EVT-000144,SMP-2026-00029,reviewed,2026-02-04 15:00,ALPHA,
+EVT-000145,SMP-2026-00029,completed,05/02/2026 09:00,system,manual review
+EVT-000146,SMP-2026-00030,received,2026-03-04 11:00,system,
+EVT-000147,SMP-2026-00030,queued,05/03/2026 15:00,BRAVO,automatic transition
+EVT-000148,SMP-2026-00030,processed,06/03/2026 04:00,CHARLIE,retry after validation error
+EVT-000149,SMP-2026-00030,reviewed,2026-03-07 11:00,CHARLIE,manual review
+EVT-000150,SMP-2026-00030,completed,2026-03-08 12:00,DELTA,external API update
+EVT-000151,SMP-2026-00031,received,31/01/2026 01:00,BRAVO,
+EVT-000152,SMP-2026-00031,queued,31/01/2026 11:00,ALPHA,retry after validation error
+EVT-000153,SMP-2026-00031,processed,2026-02-01 08:00,CHARLIE,manual review
+EVT-000154,SMP-2026-00031,reviewed,2026-02-02 18:00,CHARLIE,automatic transition
+EVT-000155,SMP-2026-00031,completed,2026-02-03 23:00,system,automatic transition
+EVT-000156,SMP-2026-00032,received,2026-01-30 19:00,BRAVO,automatic transition
+EVT-000157,SMP-2026-00032,queued,2026-01-31 08:00,BRAVO,manual review
+EVT-000158,SMP-2026-00032,processed,31/01/2026 10:00,BRAVO,external API update
+EVT-000159,SMP-2026-00032,reviewed,31/01/2026 18:00,CHARLIE,retry after validation error
+EVT-000160,SMP-2026-00032,completed,01/02/2026 21:00,BRAVO,external API update
+EVT-000161,SMP-2026-00033,received,01/03/2026 21:00,ALPHA,external API update
+EVT-000162,SMP-2026-00033,queued,02/03/2026 08:00,CHARLIE,manual review
+EVT-000163,SMP-2026-00033,processed,03/03/2026 12:00,DELTA,
+EVT-000164,SMP-2026-00033,reviewed,2026-03-03 18:00,system,
+EVT-000165,SMP-2026-00033,skipped,2026-03-04 21:00,CHARLIE,external API update
+EVT-000166,SMP-2026-00034,received,15/03/2026 18:00,CHARLIE,automatic transition
+EVT-000167,SMP-2026-00034,queued,16/03/2026 09:00,DELTA,retry after validation error
+EVT-000168,SMP-2026-00034,processed,2026-03-16 17:00,CHARLIE,
+EVT-000169,SMP-2026-00034,reviewed,17/03/2026 16:00,CHARLIE,retry after validation error
+EVT-000170,SMP-2026-00034,completed,17/03/2026 17:00,ALPHA,external API update
+EVT-000171,SMP-2026-00035,received,2026-02-11 20:00,system,retry after validation error
+EVT-000172,SMP-2026-00035,queued,2026-02-11 23:00,system,automatic transition
+EVT-000173,SMP-2026-00035,processed,12/02/2026 23:00,BRAVO,automatic transition
+EVT-000174,SMP-2026-00035,reviewed,2026-02-14 03:00,DELTA,retry after validation error
+EVT-000175,SMP-2026-00035,completed,14/02/2026 16:00,system,external API update
+EVT-000176,SMP-2026-00036,received,01/03/2026 04:00,BRAVO,external API update
+EVT-000177,SMP-2026-00036,queued,01/03/2026 15:00,ALPHA,
+EVT-000178,SMP-2026-00036,processed,2026-03-02 00:00,DELTA,retry after validation error
+EVT-000179,SMP-2026-00036,reviewed,2026-03-02 17:00,BRAVO,automatic transition
+EVT-000180,SMP-2026-00036,completed,2026-03-02 23:00,system,retry after validation error
+EVT-000181,SMP-2026-00037,received,06/01/2026 22:00,system,automatic transition
+EVT-000182,SMP-2026-00037,queued,08/01/2026 04:00,ALPHA,automatic transition
+EVT-000183,SMP-2026-00037,processed,08/01/2026 19:00,ALPHA,external API update
+EVT-000184,SMP-2026-00037,reviewed,09/01/2026 11:00,BRAVO,
+EVT-000185,SMP-2026-00037,skipped,2026-01-10 05:00,ALPHA,
+EVT-000186,SMP-2026-00038,received,2026-03-20 23:00,ALPHA,manual review
+EVT-000187,SMP-2026-00038,queued,2026-03-21 16:00,system,
+EVT-000188,SMP-2026-00038,processed,23/03/2026 00:00,ALPHA,retry after validation error
+EVT-000189,SMP-2026-00038,reviewed,23/03/2026 07:00,system,retry after validation error
+EVT-000190,SMP-2026-00038,skipped,23/03/2026 12:00,system,automatic transition
+EVT-000191,SMP-2026-00039,received,2026-02-28 23:00,ALPHA,manual review
+EVT-000192,SMP-2026-00039,queued,2026-03-01 00:00,DELTA,external API update
+EVT-000193,SMP-2026-00039,processed,2026-03-01 03:00,BRAVO,manual review
+EVT-000194,SMP-2026-00039,reviewed,2026-03-02 10:00,ALPHA,external API update
+EVT-000195,SMP-2026-00039,completed,2026-03-03 03:00,ALPHA,external API update
+EVT-000196,SMP-2026-00040,received,09/01/2026 05:00,system,automatic transition
+EVT-000197,SMP-2026-00040,queued,09/01/2026 07:00,ALPHA,automatic transition
+EVT-000198,SMP-2026-00040,processed,2026-01-09 13:00,BRAVO,manual review
+EVT-000199,SMP-2026-00040,reviewed,2026-01-10 20:00,system,manual review
+EVT-000200,SMP-2026-00040,completed,12/01/2026 08:00,CHARLIE,retry after validation error
+EVT-000201,SMP-2026-00041,received,02/03/2026 07:00,CHARLIE,
+EVT-000202,SMP-2026-00041,queued,2026-03-03 03:00,ALPHA,retry after validation error
+EVT-000203,SMP-2026-00041,processed,04/03/2026 07:00,CHARLIE,external API update
+EVT-000204,SMP-2026-00041,reviewed,05/03/2026 01:00,DELTA,
+EVT-000205,SMP-2026-00041,completed,06/03/2026 02:00,ALPHA,external API update
+EVT-000206,SMP-2026-00042,received,2026-02-20 22:00,system,external API update
+EVT-000207,SMP-2026-00042,queued,21/02/2026 15:00,BRAVO,external API update
+EVT-000208,SMP-2026-00042,processed,23/02/2026 01:00,CHARLIE,
+EVT-000209,SMP-2026-00042,reviewed,2026-02-23 09:00,BRAVO,retry after validation error
+EVT-000210,SMP-2026-00042,completed,23/02/2026 21:00,ALPHA,
+EVT-000211,SMP-2026-00043,received,2026-02-02 01:00,BRAVO,
+EVT-000212,SMP-2026-00043,queued,2026-02-02 23:00,CHARLIE,external API update
+EVT-000213,SMP-2026-00043,processed,2026-02-03 20:00,DELTA,
+EVT-000214,SMP-2026-00043,reviewed,04/02/2026 21:00,DELTA,automatic transition
+EVT-000215,SMP-2026-00043,completed,2026-02-06 07:00,system,external API update
+EVT-000216,SMP-2026-00044,received,10/02/2026 19:00,BRAVO,automatic transition
+EVT-000217,SMP-2026-00044,queued,2026-02-11 08:00,CHARLIE,retry after validation error
+EVT-000218,SMP-2026-00044,processed,11/02/2026 11:00,CHARLIE,
+EVT-000219,SMP-2026-00044,reviewed,11/02/2026 19:00,ALPHA,external API update
+EVT-000220,SMP-2026-00044,completed,12/02/2026 16:00,ALPHA,external API update
+EVT-000221,SMP-2026-00045,received,07/01/2026 18:00,BRAVO,automatic transition
+EVT-000222,SMP-2026-00045,queued,2026-01-08 20:00,DELTA,external API update
+EVT-000223,SMP-2026-00045,processed,08/01/2026 23:00,system,
+EVT-000224,SMP-2026-00045,reviewed,2026-01-10 06:00,CHARLIE,manual review
+EVT-000225,SMP-2026-00045,skipped,11/01/2026 00:00,BRAVO,retry after validation error
+EVT-000226,SMP-2026-00046,received,16/01/2026 13:00,CHARLIE,
+EVT-000227,SMP-2026-00046,processed,2026-01-17 13:00,system,automatic transition
+EVT-000228,SMP-2026-00046,queued,2026-01-17 17:00,ALPHA,
+EVT-000229,SMP-2026-00046,reviewed,18/01/2026 14:00,ALPHA,automatic transition
+EVT-000230,SMP-2026-00046,completed,2026-01-18 20:00,BRAVO,external API update
+EVT-000231,SMP-2026-00047,received,2026-01-05 23:00,BRAVO,
+EVT-000232,SMP-2026-00047,queued,06/01/2026 16:00,DELTA,retry after validation error
+EVT-000233,SMP-2026-00047,processed,2026-01-07 10:00,ALPHA,external API update
+EVT-000234,SMP-2026-00047,reviewed,2026-01-08 16:00,ALPHA,manual review
+EVT-000235,SMP-2026-00047,completed,09/01/2026 02:00,CHARLIE,
+EVT-000236,SMP-2026-00048,received,13/03/2026 10:00,CHARLIE,automatic transition
+EVT-000237,SMP-2026-00048,queued,13/03/2026 16:00,BRAVO,
+EVT-000238,SMP-2026-00048,processed,2026-03-14 15:00,ALPHA,
+EVT-000239,SMP-2026-00048,reviewed,14/03/2026 20:00,system,automatic transition
+EVT-000240,SMP-2026-00048,completed,2026-03-14 21:00,CHARLIE,retry after validation error
+EVT-000241,SMP-2026-00049,received,31/01/2026 04:00,BRAVO,retry after validation error
+EVT-000242,SMP-2026-00049,queued,2026-01-31 14:00,ALPHA,automatic transition
+EVT-000243,SMP-2026-00049,processed,01/02/2026 14:00,CHARLIE,external API update
+EVT-000244,SMP-2026-00049,reviewed,2026-02-02 23:00,CHARLIE,automatic transition
+EVT-000245,SMP-2026-00049,skipped,03/02/2026 04:00,CHARLIE,automatic transition
+EVT-000246,SMP-2026-00050,received,2026-02-13 23:00,system,retry after validation error
+EVT-000247,SMP-2026-00050,queued,14/02/2026 11:00,system,retry after validation error
+EVT-000248,SMP-2026-00050,processed,15/02/2026 21:00,BRAVO,manual review
+EVT-000249,SMP-2026-00050,reviewed,2026-02-16 05:00,BRAVO,retry after validation error
+EVT-000250,SMP-2026-00050,completed,2026-02-16 19:00,CHARLIE,external API update
+EVT-000251,SMP-2026-00051,received,2026-03-02 00:00,CHARLIE,retry after validation error
+EVT-000252,SMP-2026-00051,queued,02/03/2026 13:00,ALPHA,retry after validation error
+EVT-000253,SMP-2026-00051,processed,03/03/2026 01:00,DELTA,external API update
+EVT-000254,SMP-2026-00051,reviewed,04/03/2026 09:00,system,
+EVT-000255,SMP-2026-00051,skipped,2026-03-05 01:00,ALPHA,
+EVT-000256,SMP-2026-00052,received,2026-01-13 02:00,BRAVO,automatic transition
+EVT-000257,SMP-2026-00052,queued,14/01/2026 04:00,CHARLIE,
+EVT-000258,SMP-2026-00052,processed,14/01/2026 19:00,CHARLIE,automatic transition
+EVT-000259,SMP-2026-00052,reviewed,2026-01-15 06:00,BRAVO,manual review
+EVT-000260,SMP-2026-00052,completed,2026-01-16 01:00,system,automatic transition
+EVT-000261,SMP-2026-00053,received,2026-03-11 10:00,BRAVO,
+EVT-000262,SMP-2026-00053,queued,2026-03-11 21:00,BRAVO,retry after validation error
+EVT-000263,SMP-2026-00053,processed,2026-03-12 07:00,CHARLIE,retry after validation error
+EVT-000264,SMP-2026-00053,reviewed,2026-03-13 05:00,ALPHA,manual review
+EVT-000265,SMP-2026-00053,completed,2026-03-13 10:00,system,external API update
+EVT-000266,SMP-2026-00054,received,20/02/2026 10:00,system,
+EVT-000267,SMP-2026-00054,queued,20/02/2026 12:00,ALPHA,external API update
+EVT-000268,SMP-2026-00054,processed,2026-02-21 21:00,ALPHA,
+EVT-000269,SMP-2026-00054,reviewed,22/02/2026 04:00,BRAVO,retry after validation error
+EVT-000270,SMP-2026-00054,completed,23/02/2026 12:00,DELTA,manual review
+EVT-000271,SMP-2026-00055,received,09/03/2026 16:00,BRAVO,external API update
+EVT-000272,SMP-2026-00055,processed,2026-03-10 23:00,BRAVO,external API update
+EVT-000273,SMP-2026-00055,queued,2026-03-11 01:00,CHARLIE,automatic transition
+EVT-000274,SMP-2026-00055,reviewed,11/03/2026 11:00,CHARLIE,
+EVT-000275,SMP-2026-00055,completed,12/03/2026 03:00,BRAVO,automatic transition
+EVT-000276,SMP-2026-00056,received,16/01/2026 23:00,DELTA,retry after validation error
+EVT-000277,SMP-2026-00056,queued,2026-01-18 09:00,BRAVO,manual review
+EVT-000278,SMP-2026-00056,processed,19/01/2026 07:00,DELTA,retry after validation error
+EVT-000279,SMP-2026-00056,reviewed,20/01/2026 01:00,ALPHA,
+EVT-000280,SMP-2026-00056,completed,21/01/2026 11:00,DELTA,
+EVT-000281,SMP-2026-00057,received,02/03/2026 17:00,system,
+EVT-000282,SMP-2026-00057,queued,2026-03-04 01:00,CHARLIE,automatic transition
+EVT-000283,SMP-2026-00057,processed,05/03/2026 11:00,DELTA,external API update
+EVT-000284,SMP-2026-00057,reviewed,05/03/2026 22:00,CHARLIE,manual review
+EVT-000285,SMP-2026-00057,completed,06/03/2026 03:00,system,retry after validation error
+EVT-000286,SMP-2026-00058,received,10/01/2026 20:00,BRAVO,
+EVT-000287,SMP-2026-00058,queued,12/01/2026 00:00,system,
+EVT-000288,SMP-2026-00058,processed,2026-01-12 17:00,BRAVO,manual review
+EVT-000289,SMP-2026-00058,reviewed,2026-01-14 02:00,system,manual review
+EVT-000290,SMP-2026-00058,completed,2026-01-14 12:00,CHARLIE,external API update
+EVT-000291,SMP-2026-00059,received,2026-01-16 16:00,CHARLIE,retry after validation error
+EVT-000292,SMP-2026-00059,queued,2026-01-17 18:00,BRAVO,manual review
+EVT-000293,SMP-2026-00059,processed,2026-01-18 14:00,DELTA,retry after validation error
+EVT-000294,SMP-2026-00059,reviewed,2026-01-19 11:00,ALPHA,manual review
+EVT-000295,SMP-2026-00059,completed,19/01/2026 20:00,DELTA,automatic transition
+EVT-000296,SMP-2026-00060,received,2026-02-13 23:00,CHARLIE,retry after validation error
+EVT-000297,SMP-2026-00060,queued,2026-02-14 06:00,DELTA,retry after validation error
+EVT-000298,SMP-2026-00060,processed,15/02/2026 03:00,CHARLIE,manual review
+EVT-000299,SMP-2026-00060,reviewed,16/02/2026 07:00,CHARLIE,retry after validation error
+EVT-000300,SMP-2026-00060,skipped,2026-02-17 13:00,DELTA,
+EVT-000301,SMP-2026-00061,received,2026-02-28 11:00,DELTA,external API update
+EVT-000302,SMP-2026-00061,queued,2026-03-01 11:00,DELTA,external API update
+EVT-000303,SMP-2026-00061,processed,2026-03-02 06:00,CHARLIE,automatic transition
+EVT-000304,SMP-2026-00061,reviewed,2026-03-03 08:00,CHARLIE,external API update
+EVT-000305,SMP-2026-00061,completed,2026-03-04 14:00,system,
+EVT-000306,SMP-2026-00062,received,09/02/2026 10:00,BRAVO,
+EVT-000307,SMP-2026-00062,queued,2026-02-09 18:00,ALPHA,external API update
+EVT-000308,SMP-2026-00062,processed,10/02/2026 04:00,ALPHA,automatic transition
+EVT-000309,SMP-2026-00062,reviewed,10/02/2026 14:00,BRAVO,
+EVT-000310,SMP-2026-00062,completed,2026-02-11 22:00,system,
+EVT-000311,SMP-2026-00063,received,2026-01-05 23:00,ALPHA,
+EVT-000312,SMP-2026-00063,queued,2026-01-07 06:00,DELTA,retry after validation error
+EVT-000313,SMP-2026-00063,processed,2026-01-08 08:00,system,manual review
+EVT-000314,SMP-2026-00063,reviewed,09/01/2026 10:00,ALPHA,automatic transition
+EVT-000315,SMP-2026-00063,completed,10/01/2026 21:00,DELTA,retry after validation error
+EVT-000316,SMP-2026-00064,received,2026-01-21 04:00,ALPHA,external API update
+EVT-000317,SMP-2026-00064,processed,2026-01-22 15:00,CHARLIE,retry after validation error
+EVT-000318,SMP-2026-00064,queued,23/01/2026 10:00,system,external API update
+EVT-000319,SMP-2026-00064,reviewed,24/01/2026 18:00,BRAVO,retry after validation error
+EVT-000320,SMP-2026-00064,completed,2026-01-25 19:00,CHARLIE,retry after validation error
+EVT-000321,SMP-2026-00065,received,2026-03-01 17:00,DELTA,manual review
+EVT-000322,SMP-2026-00065,queued,01/03/2026 20:00,system,manual review
+EVT-000323,SMP-2026-00065,processed,02/03/2026 05:00,CHARLIE,manual review
+EVT-000324,SMP-2026-00065,reviewed,2026-03-02 06:00,BRAVO,external API update
+EVT-000325,SMP-2026-00065,skipped,2026-03-03 15:00,BRAVO,external API update
+EVT-000326,SMP-2026-00066,received,24/02/2026 13:00,ALPHA,manual review
+EVT-000327,SMP-2026-00066,queued,25/02/2026 09:00,system,retry after validation error
+EVT-000328,SMP-2026-00066,processed,26/02/2026 10:00,DELTA,automatic transition
+EVT-000329,SMP-2026-00066,reviewed,27/02/2026 19:00,ALPHA,manual review
+EVT-000330,SMP-2026-00066,completed,28/02/2026 18:00,system,
+EVT-000331,SMP-2026-00067,received,10/01/2026 00:00,BRAVO,automatic transition
+EVT-000332,SMP-2026-00067,queued,2026-01-10 16:00,ALPHA,retry after validation error
+EVT-000333,SMP-2026-00067,processed,2026-01-11 19:00,system,external API update
+EVT-000334,SMP-2026-00067,reviewed,2026-01-12 12:00,system,
+EVT-000335,SMP-2026-00067,completed,13/01/2026 17:00,DELTA,
+EVT-000336,SMP-2026-00068,received,2026-01-28 02:00,ALPHA,manual review
+EVT-000337,SMP-2026-00068,queued,29/01/2026 10:00,BRAVO,automatic transition
+EVT-000338,SMP-2026-00068,processed,2026-01-29 23:00,CHARLIE,external API update
+EVT-000339,SMP-2026-00068,reviewed,2026-01-30 12:00,DELTA,
+EVT-000340,SMP-2026-00068,skipped,2026-01-30 19:00,system,automatic transition
+EVT-000341,SMP-2026-00069,received,05/01/2026 22:00,ALPHA,external API update
+EVT-000342,SMP-2026-00069,queued,2026-01-07 06:00,ALPHA,external API update
+EVT-000343,SMP-2026-00069,processed,08/01/2026 13:00,BRAVO,external API update
+EVT-000344,SMP-2026-00069,reviewed,2026-01-10 01:00,system,retry after validation error
+EVT-000345,SMP-2026-00069,completed,11/01/2026 05:00,system,external API update
+EVT-000346,SMP-2026-00070,received,16/01/2026 00:00,ALPHA,
+EVT-000347,SMP-2026-00070,queued,17/01/2026 11:00,system,automatic transition
+EVT-000348,SMP-2026-00070,processed,18/01/2026 06:00,CHARLIE,manual review
+EVT-000349,SMP-2026-00070,reviewed,2026-01-18 11:00,BRAVO,
+EVT-000350,SMP-2026-00070,completed,2026-01-19 22:00,DELTA,external API update
+EVT-000351,SMP-2026-00071,received,11/03/2026 01:00,BRAVO,
+EVT-000352,SMP-2026-00071,processed,11/03/2026 04:00,CHARLIE,manual review
+EVT-000353,SMP-2026-00071,queued,11/03/2026 17:00,system,automatic transition
+EVT-000354,SMP-2026-00071,reviewed,12/03/2026 07:00,system,automatic transition
+EVT-000355,SMP-2026-00071,completed,2026-03-13 15:00,DELTA,external API update
+EVT-000356,SMP-2026-00072,received,09/01/2026 23:00,ALPHA,manual review
+EVT-000357,SMP-2026-00072,queued,2026-01-10 02:00,system,retry after validation error
+EVT-000358,SMP-2026-00072,processed,2026-01-11 11:00,BRAVO,retry after validation error
+EVT-000359,SMP-2026-00072,reviewed,12/01/2026 18:00,ALPHA,
+EVT-000360,SMP-2026-00072,completed,2026-01-12 22:00,ALPHA,external API update
+EVT-000361,SMP-2026-00073,received,2026-02-23 16:00,CHARLIE,retry after validation error
+EVT-000362,SMP-2026-00073,processed,2026-02-25 04:00,system,retry after validation error
+EVT-000363,SMP-2026-00073,queued,25/02/2026 12:00,BRAVO,automatic transition
+EVT-000364,SMP-2026-00073,reviewed,26/02/2026 10:00,system,automatic transition
+EVT-000365,SMP-2026-00073,completed,2026-02-27 01:00,DELTA,
+EVT-000366,SMP-2026-00074,received,2026-02-05 05:00,system,automatic transition
+EVT-000367,SMP-2026-00074,queued,2026-02-05 09:00,system,automatic transition
+EVT-000368,SMP-2026-00074,processed,2026-02-06 14:00,BRAVO,
+EVT-000369,SMP-2026-00074,reviewed,07/02/2026 11:00,DELTA,automatic transition
+EVT-000370,SMP-2026-00074,completed,2026-02-08 06:00,DELTA,retry after validation error
+EVT-000371,SMP-2026-00075,received,2026-03-09 02:00,CHARLIE,manual review
+EVT-000372,SMP-2026-00075,queued,09/03/2026 17:00,BRAVO,manual review
+EVT-000373,SMP-2026-00075,processed,11/03/2026 05:00,ALPHA,external API update
+EVT-000374,SMP-2026-00075,reviewed,11/03/2026 23:00,DELTA,external API update
+EVT-000375,SMP-2026-00075,completed,2026-03-12 06:00,BRAVO,retry after validation error
+EVT-000376,SMP-2026-00076,received,2026-03-10 03:00,BRAVO,external API update
+EVT-000377,SMP-2026-00076,queued,2026-03-10 17:00,BRAVO,automatic transition
+EVT-000378,SMP-2026-00076,processed,2026-03-10 20:00,CHARLIE,retry after validation error
+EVT-000379,SMP-2026-00076,reviewed,2026-03-11 04:00,CHARLIE,
+EVT-000380,SMP-2026-00076,skipped,11/03/2026 22:00,DELTA,retry after validation error
+EVT-000381,SMP-2026-00077,received,13/02/2026 16:00,system,retry after validation error
+EVT-000382,SMP-2026-00077,queued,14/02/2026 17:00,system,automatic transition
+EVT-000383,SMP-2026-00077,processed,15/02/2026 07:00,ALPHA,retry after validation error
+EVT-000384,SMP-2026-00077,reviewed,2026-02-16 18:00,BRAVO,
+EVT-000385,SMP-2026-00077,skipped,18/02/2026 05:00,system,external API update
+EVT-000386,SMP-2026-00078,received,17/02/2026 19:00,DELTA,retry after validation error
+EVT-000387,SMP-2026-00078,queued,2026-02-18 23:00,system,external API update
+EVT-000388,SMP-2026-00078,processed,20/02/2026 00:00,DELTA,retry after validation error
+EVT-000389,SMP-2026-00078,reviewed,21/02/2026 04:00,ALPHA,retry after validation error
+EVT-000390,SMP-2026-00078,completed,2026-02-22 10:00,ALPHA,
+EVT-000391,SMP-2026-00079,received,11/02/2026 04:00,BRAVO,external API update
+EVT-000392,SMP-2026-00079,queued,2026-02-12 06:00,DELTA,manual review
+EVT-000393,SMP-2026-00079,processed,13/02/2026 06:00,BRAVO,external API update
+EVT-000394,SMP-2026-00079,reviewed,2026-02-13 07:00,BRAVO,external API update
+EVT-000395,SMP-2026-00079,skipped,14/02/2026 04:00,ALPHA,retry after validation error
+EVT-000396,SMP-2026-00080,received,06/03/2026 14:00,DELTA,automatic transition
+EVT-000397,SMP-2026-00080,queued,2026-03-07 17:00,DELTA,
+EVT-000398,SMP-2026-00080,processed,08/03/2026 11:00,system,retry after validation error
+EVT-000399,SMP-2026-00080,reviewed,08/03/2026 23:00,BRAVO,manual review
+EVT-000400,SMP-2026-00080,completed,2026-03-10 07:00,ALPHA,automatic transition
+EVT-000401,SMP-2026-00081,received,24/01/2026 03:00,DELTA,manual review
+EVT-000402,SMP-2026-00081,queued,2026-01-24 06:00,system,manual review
+EVT-000403,SMP-2026-00081,processed,2026-01-24 23:00,BRAVO,external API update
+EVT-000404,SMP-2026-00081,reviewed,2026-01-25 02:00,BRAVO,
+EVT-000405,SMP-2026-00081,completed,25/01/2026 07:00,system,external API update
+EVT-000406,SMP-2026-00082,received,2026-01-15 19:00,CHARLIE,manual review
+EVT-000407,SMP-2026-00082,queued,2026-01-16 05:00,BRAVO,external API update
+EVT-000408,SMP-2026-00082,processed,17/01/2026 05:00,CHARLIE,manual review
+EVT-000409,SMP-2026-00082,reviewed,18/01/2026 12:00,DELTA,
+EVT-000410,SMP-2026-00082,completed,18/01/2026 23:00,system,manual review
+EVT-000411,SMP-2026-00083,received,25/01/2026 12:00,ALPHA,retry after validation error
+EVT-000412,SMP-2026-00083,queued,2026-01-25 15:00,CHARLIE,
+EVT-000413,SMP-2026-00083,processed,2026-01-25 20:00,DELTA,external API update
+EVT-000414,SMP-2026-00083,reviewed,27/01/2026 08:00,DELTA,
+EVT-000415,SMP-2026-00083,skipped,2026-01-28 18:00,DELTA,retry after validation error
+EVT-000416,SMP-2026-00084,received,2026-03-14 13:00,BRAVO,automatic transition
+EVT-000417,SMP-2026-00084,queued,2026-03-15 13:00,CHARLIE,manual review
+EVT-000418,SMP-2026-00084,processed,2026-03-15 21:00,CHARLIE,retry after validation error
+EVT-000419,SMP-2026-00084,reviewed,2026-03-16 21:00,BRAVO,external API update
+EVT-000420,SMP-2026-00084,completed,2026-03-18 06:00,BRAVO,retry after validation error
+EVT-000421,SMP-2026-00085,received,2026-02-04 03:00,CHARLIE,external API update
+EVT-000422,SMP-2026-00085,queued,04/02/2026 12:00,BRAVO,manual review
+EVT-000423,SMP-2026-00085,processed,2026-02-05 09:00,system,retry after validation error
+EVT-000424,SMP-2026-00085,reviewed,2026-02-06 12:00,DELTA,retry after validation error
+EVT-000425,SMP-2026-00085,completed,2026-02-07 01:00,CHARLIE,
+EVT-000426,SMP-2026-00086,received,2026-01-27 22:00,ALPHA,
+EVT-000427,SMP-2026-00086,queued,2026-01-29 02:00,ALPHA,
+EVT-000428,SMP-2026-00086,processed,29/01/2026 11:00,CHARLIE,manual review
+EVT-000429,SMP-2026-00086,reviewed,29/01/2026 20:00,DELTA,automatic transition
+EVT-000430,SMP-2026-00086,completed,2026-01-30 15:00,BRAVO,manual review
+EVT-000431,SMP-2026-00087,received,22/03/2026 14:00,CHARLIE,retry after validation error
+EVT-000432,SMP-2026-00087,processed,23/03/2026 18:00,CHARLIE,automatic transition
+EVT-000433,SMP-2026-00087,queued,2026-03-24 06:00,ALPHA,
+EVT-000434,SMP-2026-00087,reviewed,25/03/2026 06:00,CHARLIE,manual review
+EVT-000435,SMP-2026-00087,completed,2026-03-26 11:00,DELTA,external API update
+EVT-000436,SMP-2026-00088,received,09/02/2026 19:00,BRAVO,manual review
+EVT-000437,SMP-2026-00088,queued,10/02/2026 20:00,ALPHA,automatic transition
+EVT-000438,SMP-2026-00088,processed,2026-02-10 23:00,CHARLIE,external API update
+EVT-000439,SMP-2026-00088,reviewed,11/02/2026 17:00,system,manual review
+EVT-000440,SMP-2026-00088,completed,2026-02-12 12:00,system,manual review
+EVT-000441,SMP-2026-00089,received,10/02/2026 13:00,DELTA,
+EVT-000442,SMP-2026-00089,queued,11/02/2026 04:00,ALPHA,
+EVT-000443,SMP-2026-00089,processed,2026-02-11 18:00,system,external API update
+EVT-000444,SMP-2026-00089,reviewed,2026-02-11 21:00,system,retry after validation error
+EVT-000445,SMP-2026-00089,completed,11/02/2026 23:00,ALPHA,manual review
+EVT-000446,SMP-2026-00090,received,21/03/2026 00:00,system,
+EVT-000447,SMP-2026-00090,queued,22/03/2026 05:00,CHARLIE,manual review
+EVT-000448,SMP-2026-00090,processed,2026-03-22 11:00,BRAVO,
+EVT-000449,SMP-2026-00090,reviewed,2026-03-23 10:00,ALPHA,
+EVT-000450,SMP-2026-00090,completed,2026-03-24 07:00,DELTA,manual review
+EVT-000451,SMP-2026-00091,received,09/02/2026 23:00,system,retry after validation error
+EVT-000452,SMP-2026-00091,queued,10/02/2026 06:00,ALPHA,external API update
+EVT-000453,SMP-2026-00091,processed,2026-02-10 09:00,ALPHA,automatic transition
+EVT-000454,SMP-2026-00091,reviewed,2026-02-11 10:00,ALPHA,manual review
+EVT-000455,SMP-2026-00091,completed,2026-02-12 17:00,CHARLIE,automatic transition
+EVT-000456,SMP-2026-00092,received,2026-03-09 23:00,system,retry after validation error
+EVT-000457,SMP-2026-00092,queued,10/03/2026 04:00,DELTA,external API update
+EVT-000458,SMP-2026-00092,processed,2026-03-10 18:00,system,retry after validation error
+EVT-000459,SMP-2026-00092,reviewed,11/03/2026 11:00,DELTA,automatic transition
+EVT-000460,SMP-2026-00092,completed,12/03/2026 10:00,DELTA,automatic transition
+EVT-000461,SMP-2026-00093,received,14/02/2026 00:00,DELTA,manual review
+EVT-000462,SMP-2026-00093,queued,15/02/2026 11:00,BRAVO,
+EVT-000463,SMP-2026-00093,processed,2026-02-16 02:00,BRAVO,retry after validation error
+EVT-000464,SMP-2026-00093,reviewed,17/02/2026 07:00,ALPHA,retry after validation error
+EVT-000465,SMP-2026-00093,completed,2026-02-17 15:00,CHARLIE,manual review
+EVT-000466,SMP-2026-00094,received,21/01/2026 00:00,DELTA,retry after validation error
+EVT-000467,SMP-2026-00094,queued,2026-01-21 16:00,BRAVO,manual review
+EVT-000468,SMP-2026-00094,processed,2026-01-23 01:00,CHARLIE,
+EVT-000469,SMP-2026-00094,reviewed,24/01/2026 13:00,BRAVO,manual review
+EVT-000470,SMP-2026-00094,completed,25/01/2026 16:00,CHARLIE,retry after validation error
+EVT-000471,SMP-2026-00095,received,26/02/2026 08:00,system,manual review
+EVT-000472,SMP-2026-00095,queued,27/02/2026 13:00,ALPHA,external API update
+EVT-000473,SMP-2026-00095,processed,2026-02-28 00:00,system,external API update
+EVT-000474,SMP-2026-00095,reviewed,2026-02-28 22:00,DELTA,external API update
+EVT-000475,SMP-2026-00095,completed,2026-03-01 00:00,CHARLIE,
+EVT-000476,SMP-2026-00096,received,2026-02-16 21:00,BRAVO,external API update
+EVT-000477,SMP-2026-00096,queued,2026-02-17 10:00,DELTA,retry after validation error
+EVT-000478,SMP-2026-00096,processed,18/02/2026 01:00,ALPHA,manual review
+EVT-000479,SMP-2026-00096,reviewed,18/02/2026 23:00,ALPHA,external API update
+EVT-000480,SMP-2026-00096,completed,2026-02-19 15:00,system,
+EVT-000481,SMP-2026-00097,received,2026-03-13 18:00,BRAVO,manual review
+EVT-000482,SMP-2026-00097,queued,2026-03-13 20:00,ALPHA,
+EVT-000483,SMP-2026-00097,processed,2026-03-14 14:00,CHARLIE,retry after validation error
+EVT-000484,SMP-2026-00097,reviewed,14/03/2026 23:00,system,
+EVT-000485,SMP-2026-00097,completed,15/03/2026 04:00,system,
+EVT-000486,SMP-2026-00098,received,2026-03-16 18:00,DELTA,manual review
+EVT-000487,SMP-2026-00098,queued,17/03/2026 15:00,DELTA,
+EVT-000488,SMP-2026-00098,processed,18/03/2026 11:00,CHARLIE,automatic transition
+EVT-000489,SMP-2026-00098,reviewed,18/03/2026 18:00,DELTA,retry after validation error
+EVT-000490,SMP-2026-00098,skipped,19/03/2026 19:00,CHARLIE,
+EVT-000491,SMP-2026-00099,received,2026-02-04 05:00,CHARLIE,
+EVT-000492,SMP-2026-00099,queued,05/02/2026 13:00,BRAVO,external API update
+EVT-000493,SMP-2026-00099,processed,05/02/2026 20:00,ALPHA,external API update
+EVT-000494,SMP-2026-00099,reviewed,05/02/2026 22:00,ALPHA,retry after validation error
+EVT-000495,SMP-2026-00099,completed,06/02/2026 22:00,DELTA,
+EVT-000496,SMP-2026-00100,received,2026-02-13 23:00,DELTA,automatic transition
+EVT-000497,SMP-2026-00100,queued,14/02/2026 13:00,DELTA,automatic transition
+EVT-000498,SMP-2026-00100,processed,2026-02-14 19:00,CHARLIE,external API update
+EVT-000499,SMP-2026-00100,reviewed,2026-02-16 02:00,system,retry after validation error
+EVT-000500,SMP-2026-00100,completed,16/02/2026 19:00,BRAVO,manual review
+EVT-000501,SMP-2026-00101,received,2026-01-25 18:00,BRAVO,automatic transition
+EVT-000502,SMP-2026-00101,queued,27/01/2026 06:00,DELTA,retry after validation error
+EVT-000503,SMP-2026-00101,processed,2026-01-28 03:00,BRAVO,retry after validation error
+EVT-000504,SMP-2026-00101,reviewed,2026-01-29 10:00,system,retry after validation error
+EVT-000505,SMP-2026-00101,completed,29/01/2026 15:00,ALPHA,
+EVT-000506,SMP-2026-00102,received,2026-01-25 23:00,CHARLIE,retry after validation error
+EVT-000507,SMP-2026-00102,queued,26/01/2026 10:00,ALPHA,external API update
+EVT-000508,SMP-2026-00102,processed,27/01/2026 13:00,system,manual review
+EVT-000509,SMP-2026-00102,reviewed,27/01/2026 21:00,BRAVO,manual review
+EVT-000510,SMP-2026-00102,completed,29/01/2026 07:00,DELTA,manual review
+EVT-000511,SMP-2026-00103,received,19/03/2026 06:00,DELTA,external API update
+EVT-000512,SMP-2026-00103,queued,19/03/2026 23:00,CHARLIE,automatic transition
+EVT-000513,SMP-2026-00103,processed,2026-03-20 21:00,ALPHA,external API update
+EVT-000514,SMP-2026-00103,reviewed,2026-03-22 04:00,BRAVO,retry after validation error
+EVT-000515,SMP-2026-00103,completed,2026-03-22 16:00,CHARLIE,
+EVT-000516,SMP-2026-00104,received,06/01/2026 00:00,BRAVO,
+EVT-000517,SMP-2026-00104,queued,06/01/2026 04:00,DELTA,automatic transition
+EVT-000518,SMP-2026-00104,processed,06/01/2026 09:00,DELTA,automatic transition
+EVT-000519,SMP-2026-00104,reviewed,2026-01-07 08:00,ALPHA,manual review
+EVT-000520,SMP-2026-00104,completed,08/01/2026 03:00,DELTA,manual review
+EVT-000521,SMP-2026-00105,received,2026-02-22 07:00,DELTA,automatic transition
+EVT-000522,SMP-2026-00105,queued,2026-02-22 14:00,BRAVO,automatic transition
+EVT-000523,SMP-2026-00105,processed,2026-02-23 07:00,ALPHA,external API update
+EVT-000524,SMP-2026-00105,reviewed,24/02/2026 08:00,DELTA,external API update
+EVT-000525,SMP-2026-00105,completed,25/02/2026 02:00,ALPHA,automatic transition
+EVT-000526,SMP-2026-00106,received,2026-01-06 02:00,ALPHA,retry after validation error
+EVT-000527,SMP-2026-00106,queued,06/01/2026 03:00,system,
+EVT-000528,SMP-2026-00106,processed,06/01/2026 12:00,CHARLIE,retry after validation error
+EVT-000529,SMP-2026-00106,reviewed,07/01/2026 09:00,DELTA,
+EVT-000530,SMP-2026-00106,completed,08/01/2026 01:00,CHARLIE,retry after validation error
+EVT-000531,SMP-2026-00107,received,2026-03-08 03:00,DELTA,automatic transition
+EVT-000532,SMP-2026-00107,queued,08/03/2026 14:00,ALPHA,retry after validation error
+EVT-000533,SMP-2026-00107,processed,10/03/2026 02:00,CHARLIE,manual review
+EVT-000534,SMP-2026-00107,reviewed,10/03/2026 10:00,BRAVO,automatic transition
+EVT-000535,SMP-2026-00107,completed,10/03/2026 12:00,CHARLIE,manual review
+EVT-000536,SMP-2026-00108,received,01/03/2026 05:00,BRAVO,automatic transition
+EVT-000537,SMP-2026-00108,queued,2026-03-01 06:00,CHARLIE,manual review
+EVT-000538,SMP-2026-00108,processed,2026-03-02 16:00,system,external API update
+EVT-000539,SMP-2026-00108,reviewed,03/03/2026 12:00,system,manual review
+EVT-000540,SMP-2026-00108,completed,2026-03-04 05:00,DELTA,manual review
+EVT-000541,SMP-2026-00109,received,10/01/2026 10:00,system,external API update
+EVT-000542,SMP-2026-00109,queued,10/01/2026 12:00,DELTA,retry after validation error
+EVT-000543,SMP-2026-00109,processed,2026-01-11 20:00,CHARLIE,external API update
+EVT-000544,SMP-2026-00109,reviewed,2026-01-12 03:00,BRAVO,
+EVT-000545,SMP-2026-00109,completed,2026-01-12 13:00,ALPHA,
+EVT-000546,SMP-2026-00110,received,27/02/2026 19:00,system,external API update
+EVT-000547,SMP-2026-00110,queued,2026-02-28 13:00,DELTA,
+EVT-000548,SMP-2026-00110,processed,01/03/2026 11:00,ALPHA,external API update
+EVT-000549,SMP-2026-00110,reviewed,2026-03-02 11:00,CHARLIE,retry after validation error
+EVT-000550,SMP-2026-00110,skipped,2026-03-02 15:00,ALPHA,external API update
+EVT-000551,SMP-2026-00111,received,2026-01-24 11:00,DELTA,retry after validation error
+EVT-000552,SMP-2026-00111,queued,2026-01-24 23:00,BRAVO,manual review
+EVT-000553,SMP-2026-00111,processed,26/01/2026 11:00,system,manual review
+EVT-000554,SMP-2026-00111,reviewed,2026-01-27 17:00,DELTA,retry after validation error
+EVT-000555,SMP-2026-00111,skipped,2026-01-27 23:00,system,automatic transition
+EVT-000556,SMP-2026-00112,received,2026-01-16 18:00,system,automatic transition
+EVT-000557,SMP-2026-00112,queued,17/01/2026 18:00,system,automatic transition
+EVT-000558,SMP-2026-00112,processed,2026-01-18 14:00,ALPHA,manual review
+EVT-000559,SMP-2026-00112,reviewed,18/01/2026 18:00,BRAVO,automatic transition
+EVT-000560,SMP-2026-00112,completed,2026-01-19 12:00,DELTA,manual review
+EVT-000561,SMP-2026-00113,received,2026-02-27 05:00,BRAVO,manual review
+EVT-000562,SMP-2026-00113,queued,28/02/2026 10:00,system,retry after validation error
+EVT-000563,SMP-2026-00113,processed,01/03/2026 09:00,BRAVO,external API update
+EVT-000564,SMP-2026-00113,reviewed,2026-03-02 14:00,system,external API update
+EVT-000565,SMP-2026-00113,completed,2026-03-03 15:00,DELTA,external API update
+EVT-000566,SMP-2026-00114,received,2026-02-01 13:00,BRAVO,external API update
+EVT-000567,SMP-2026-00114,queued,03/02/2026 01:00,system,external API update
+EVT-000568,SMP-2026-00114,processed,03/02/2026 15:00,ALPHA,retry after validation error
+EVT-000569,SMP-2026-00114,reviewed,2026-02-04 08:00,system,external API update
+EVT-000570,SMP-2026-00114,completed,04/02/2026 20:00,ALPHA,retry after validation error
+EVT-000571,SMP-2026-00115,received,21/03/2026 20:00,system,manual review
+EVT-000572,SMP-2026-00115,queued,2026-03-21 21:00,CHARLIE,retry after validation error
+EVT-000573,SMP-2026-00115,processed,22/03/2026 19:00,system,automatic transition
+EVT-000574,SMP-2026-00115,reviewed,23/03/2026 18:00,ALPHA,retry after validation error
+EVT-000575,SMP-2026-00115,completed,2026-03-25 05:00,system,retry after validation error
+EVT-000576,SMP-2026-00116,received,05/03/2026 10:00,BRAVO,external API update
+EVT-000577,SMP-2026-00116,queued,06/03/2026 08:00,CHARLIE,manual review
+EVT-000578,SMP-2026-00116,processed,2026-03-06 11:00,DELTA,
+EVT-000579,SMP-2026-00116,reviewed,07/03/2026 14:00,BRAVO,external API update
+EVT-000580,SMP-2026-00116,completed,2026-03-08 16:00,ALPHA,external API update
+EVT-000581,SMP-2026-00117,received,2026-01-28 03:00,DELTA,automatic transition
+EVT-000582,SMP-2026-00117,queued,28/01/2026 12:00,system,
+EVT-000583,SMP-2026-00117,processed,2026-01-29 08:00,BRAVO,retry after validation error
+EVT-000584,SMP-2026-00117,reviewed,2026-01-30 10:00,CHARLIE,
+EVT-000585,SMP-2026-00117,completed,2026-01-30 20:00,ALPHA,manual review
+EVT-000586,SMP-2026-00118,received,2026-02-14 19:00,ALPHA,automatic transition
+EVT-000587,SMP-2026-00118,queued,16/02/2026 07:00,system,retry after validation error
+EVT-000588,SMP-2026-00118,processed,16/02/2026 18:00,system,retry after validation error
+EVT-000589,SMP-2026-00118,reviewed,18/02/2026 06:00,ALPHA,retry after validation error
+EVT-000590,SMP-2026-00118,completed,19/02/2026 07:00,ALPHA,
+EVT-000591,SMP-2026-00119,received,24/02/2026 18:00,BRAVO,retry after validation error
+EVT-000592,SMP-2026-00119,queued,2026-02-25 20:00,BRAVO,retry after validation error
+EVT-000593,SMP-2026-00119,processed,2026-02-25 22:00,DELTA,automatic transition
+EVT-000594,SMP-2026-00119,reviewed,26/02/2026 14:00,BRAVO,manual review
+EVT-000595,SMP-2026-00119,completed,2026-02-27 23:00,DELTA,external API update
+EVT-000596,SMP-2026-00120,received,2026-02-25 04:00,ALPHA,manual review
+EVT-000597,SMP-2026-00120,queued,2026-02-26 08:00,BRAVO,retry after validation error
+EVT-000598,SMP-2026-00120,processed,26/02/2026 20:00,ALPHA,manual review
+EVT-000599,SMP-2026-00120,reviewed,27/02/2026 16:00,CHARLIE,
+EVT-000600,SMP-2026-00120,completed,28/02/2026 09:00,ALPHA,automatic transition
+EVT-000601,SMP-2026-00121,received,24/02/2026 22:00,system,automatic transition
+EVT-000602,SMP-2026-00121,queued,2026-02-25 19:00,DELTA,external API update
+EVT-000603,SMP-2026-00121,processed,26/02/2026 20:00,system,retry after validation error
+EVT-000604,SMP-2026-00121,reviewed,27/02/2026 22:00,system,manual review
+EVT-000605,SMP-2026-00121,completed,01/03/2026 02:00,system,external API update
+EVT-000606,SMP-2026-00122,received,05/03/2026 04:00,system,automatic transition
+EVT-000607,SMP-2026-00122,queued,06/03/2026 08:00,system,automatic transition
+EVT-000608,SMP-2026-00122,processed,06/03/2026 09:00,DELTA,manual review
+EVT-000609,SMP-2026-00122,reviewed,06/03/2026 22:00,CHARLIE,
+EVT-000610,SMP-2026-00122,completed,08/03/2026 04:00,system,
+EVT-000611,SMP-2026-00123,received,09/03/2026 18:00,CHARLIE,manual review
+EVT-000612,SMP-2026-00123,queued,2026-03-10 13:00,DELTA,manual review
+EVT-000613,SMP-2026-00123,processed,11/03/2026 01:00,BRAVO,retry after validation error
+EVT-000614,SMP-2026-00123,reviewed,11/03/2026 03:00,BRAVO,manual review
+EVT-000615,SMP-2026-00123,completed,2026-03-11 06:00,BRAVO,
+EVT-000616,SMP-2026-00124,received,2026-03-15 01:00,ALPHA,retry after validation error
+EVT-000617,SMP-2026-00124,queued,16/03/2026 05:00,BRAVO,retry after validation error
+EVT-000618,SMP-2026-00124,processed,16/03/2026 21:00,system,
+EVT-000619,SMP-2026-00124,reviewed,17/03/2026 18:00,system,automatic transition
+EVT-000620,SMP-2026-00124,completed,18/03/2026 01:00,DELTA,
+EVT-000621,SMP-2026-00125,received,2026-02-18 10:00,CHARLIE,
+EVT-000622,SMP-2026-00125,processed,18/02/2026 23:00,BRAVO,external API update
+EVT-000623,SMP-2026-00125,queued,2026-02-20 08:00,system,manual review
+EVT-000624,SMP-2026-00125,reviewed,2026-02-21 15:00,CHARLIE,manual review
+EVT-000625,SMP-2026-00125,completed,22/02/2026 03:00,DELTA,
+EVT-000626,SMP-2026-00126,received,2026-02-26 19:00,system,retry after validation error
+EVT-000627,SMP-2026-00126,queued,27/02/2026 04:00,BRAVO,retry after validation error
+EVT-000628,SMP-2026-00126,processed,2026-02-28 01:00,ALPHA,automatic transition
+EVT-000629,SMP-2026-00126,reviewed,28/02/2026 03:00,ALPHA,
+EVT-000630,SMP-2026-00126,completed,28/02/2026 22:00,DELTA,retry after validation error
+EVT-000631,SMP-2026-00127,received,17/02/2026 16:00,BRAVO,manual review
+EVT-000632,SMP-2026-00127,queued,2026-02-18 21:00,CHARLIE,retry after validation error
+EVT-000633,SMP-2026-00127,processed,2026-02-19 11:00,CHARLIE,manual review
+EVT-000634,SMP-2026-00127,reviewed,2026-02-20 13:00,DELTA,
+EVT-000635,SMP-2026-00127,completed,21/02/2026 21:00,system,automatic transition
+EVT-000636,SMP-2026-00128,received,14/03/2026 22:00,system,automatic transition
+EVT-000637,SMP-2026-00128,queued,15/03/2026 09:00,DELTA,retry after validation error
+EVT-000638,SMP-2026-00128,processed,2026-03-16 12:00,BRAVO,external API update
+EVT-000639,SMP-2026-00128,reviewed,2026-03-17 20:00,CHARLIE,external API update
+EVT-000640,SMP-2026-00128,completed,18/03/2026 05:00,DELTA,
+EVT-000641,SMP-2026-00129,received,2026-01-18 13:00,ALPHA,retry after validation error
+EVT-000642,SMP-2026-00129,queued,20/01/2026 01:00,BRAVO,automatic transition
+EVT-000643,SMP-2026-00129,processed,21/01/2026 04:00,BRAVO,manual review
+EVT-000644,SMP-2026-00129,reviewed,21/01/2026 11:00,DELTA,external API update
+EVT-000645,SMP-2026-00129,completed,22/01/2026 22:00,ALPHA,retry after validation error
+EVT-000646,SMP-2026-00130,received,2026-03-10 05:00,CHARLIE,manual review
+EVT-000647,SMP-2026-00130,queued,10/03/2026 06:00,CHARLIE,automatic transition
+EVT-000648,SMP-2026-00130,processed,10/03/2026 13:00,DELTA,retry after validation error
+EVT-000649,SMP-2026-00130,reviewed,11/03/2026 16:00,ALPHA,
+EVT-000650,SMP-2026-00130,completed,2026-03-12 07:00,DELTA,external API update
+EVT-000651,SMP-2026-00131,received,10/03/2026 17:00,DELTA,automatic transition
+EVT-000652,SMP-2026-00131,queued,11/03/2026 04:00,system,manual review
+EVT-000653,SMP-2026-00131,processed,11/03/2026 06:00,DELTA,external API update
+EVT-000654,SMP-2026-00131,reviewed,2026-03-11 19:00,CHARLIE,manual review
+EVT-000655,SMP-2026-00131,completed,2026-03-12 11:00,CHARLIE,automatic transition
+EVT-000656,SMP-2026-00132,received,16/02/2026 06:00,CHARLIE,automatic transition
+EVT-000657,SMP-2026-00132,queued,2026-02-17 11:00,ALPHA,retry after validation error
+EVT-000658,SMP-2026-00132,processed,2026-02-18 20:00,DELTA,manual review
+EVT-000659,SMP-2026-00132,reviewed,2026-02-19 07:00,CHARLIE,
+EVT-000660,SMP-2026-00132,completed,2026-02-19 08:00,CHARLIE,external API update
+EVT-000661,SMP-2026-00133,received,2026-03-07 11:00,DELTA,external API update
+EVT-000662,SMP-2026-00133,queued,07/03/2026 13:00,CHARLIE,
+EVT-000663,SMP-2026-00133,processed,08/03/2026 08:00,system,manual review
+EVT-000664,SMP-2026-00133,reviewed,09/03/2026 10:00,CHARLIE,
+EVT-000665,SMP-2026-00133,skipped,2026-03-09 17:00,BRAVO,external API update
+EVT-000666,SMP-2026-00134,received,2026-01-20 02:00,CHARLIE,automatic transition
+EVT-000667,SMP-2026-00134,queued,2026-01-20 19:00,BRAVO,
+EVT-000668,SMP-2026-00134,processed,22/01/2026 01:00,ALPHA,manual review
+EVT-000669,SMP-2026-00134,reviewed,22/01/2026 23:00,CHARLIE,manual review
+EVT-000670,SMP-2026-00134,completed,24/01/2026 04:00,DELTA,manual review
+EVT-000671,SMP-2026-00135,received,10/01/2026 07:00,DELTA,manual review
+EVT-000672,SMP-2026-00135,queued,11/01/2026 02:00,ALPHA,external API update
+EVT-000673,SMP-2026-00135,processed,11/01/2026 22:00,CHARLIE,manual review
+EVT-000674,SMP-2026-00135,reviewed,2026-01-12 08:00,ALPHA,external API update
+EVT-000675,SMP-2026-00135,completed,13/01/2026 03:00,BRAVO,automatic transition
+EVT-000676,SMP-2026-00136,received,08/01/2026 17:00,BRAVO,external API update
+EVT-000677,SMP-2026-00136,queued,10/01/2026 03:00,CHARLIE,external API update
+EVT-000678,SMP-2026-00136,processed,10/01/2026 14:00,ALPHA,external API update
+EVT-000679,SMP-2026-00136,reviewed,11/01/2026 23:00,DELTA,manual review
+EVT-000680,SMP-2026-00136,completed,13/01/2026 00:00,ALPHA,external API update
+EVT-000681,SMP-2026-00137,received,07/03/2026 21:00,ALPHA,manual review
+EVT-000682,SMP-2026-00137,queued,2026-03-08 11:00,ALPHA,manual review
+EVT-000683,SMP-2026-00137,processed,2026-03-08 19:00,BRAVO,retry after validation error
+EVT-000684,SMP-2026-00137,reviewed,2026-03-10 01:00,DELTA,automatic transition
+EVT-000685,SMP-2026-00137,completed,10/03/2026 14:00,system,retry after validation error
+EVT-000686,SMP-2026-00138,received,2026-01-19 04:00,system,retry after validation error
+EVT-000687,SMP-2026-00138,queued,2026-01-20 14:00,ALPHA,manual review
+EVT-000688,SMP-2026-00138,processed,2026-01-21 02:00,ALPHA,retry after validation error
+EVT-000689,SMP-2026-00138,reviewed,2026-01-21 14:00,DELTA,manual review
+EVT-000690,SMP-2026-00138,completed,23/01/2026 02:00,system,automatic transition
+EVT-000691,SMP-2026-00139,received,2026-01-14 07:00,DELTA,external API update
+EVT-000692,SMP-2026-00139,queued,15/01/2026 14:00,system,external API update
+EVT-000693,SMP-2026-00139,processed,15/01/2026 18:00,system,automatic transition
+EVT-000694,SMP-2026-00139,reviewed,2026-01-17 01:00,CHARLIE,
+EVT-000695,SMP-2026-00139,completed,2026-01-18 08:00,system,external API update
+EVT-000696,SMP-2026-00140,received,21/03/2026 17:00,system,retry after validation error
+EVT-000697,SMP-2026-00140,queued,22/03/2026 06:00,system,manual review
+EVT-000698,SMP-2026-00140,processed,23/03/2026 09:00,CHARLIE,automatic transition
+EVT-000699,SMP-2026-00140,reviewed,24/03/2026 07:00,DELTA,manual review
+EVT-000700,SMP-2026-00140,completed,25/03/2026 03:00,DELTA,automatic transition
+EVT-000701,SMP-2026-00141,received,2026-02-18 22:00,ALPHA,retry after validation error
+EVT-000702,SMP-2026-00141,queued,18/02/2026 23:00,DELTA,retry after validation error
+EVT-000703,SMP-2026-00141,processed,2026-02-20 07:00,ALPHA,
+EVT-000704,SMP-2026-00141,reviewed,21/02/2026 11:00,system,retry after validation error
+EVT-000705,SMP-2026-00141,completed,2026-02-22 09:00,ALPHA,
+EVT-000706,SMP-2026-00142,received,05/02/2026 02:00,system,manual review
+EVT-000707,SMP-2026-00142,queued,2026-02-05 16:00,BRAVO,automatic transition
+EVT-000708,SMP-2026-00142,processed,06/02/2026 05:00,ALPHA,automatic transition
+EVT-000709,SMP-2026-00142,reviewed,06/02/2026 16:00,DELTA,retry after validation error
+EVT-000710,SMP-2026-00142,completed,07/02/2026 19:00,ALPHA,manual review
+EVT-000711,SMP-2026-00143,received,07/03/2026 16:00,CHARLIE,manual review
+EVT-000712,SMP-2026-00143,queued,08/03/2026 20:00,CHARLIE,
+EVT-000713,SMP-2026-00143,processed,2026-03-09 22:00,CHARLIE,manual review
+EVT-000714,SMP-2026-00143,reviewed,10/03/2026 07:00,BRAVO,
+EVT-000715,SMP-2026-00143,completed,2026-03-10 20:00,BRAVO,manual review
+EVT-000716,SMP-2026-00144,received,2026-02-22 12:00,ALPHA,external API update
+EVT-000717,SMP-2026-00144,queued,23/02/2026 21:00,BRAVO,
+EVT-000718,SMP-2026-00144,processed,2026-02-24 02:00,ALPHA,manual review
+EVT-000719,SMP-2026-00144,reviewed,25/02/2026 09:00,system,retry after validation error
+EVT-000720,SMP-2026-00144,completed,2026-02-26 17:00,BRAVO,external API update
+EVT-000721,SMP-2026-00145,received,22/03/2026 16:00,DELTA,manual review
+EVT-000722,SMP-2026-00145,processed,23/03/2026 21:00,system,retry after validation error
+EVT-000723,SMP-2026-00145,queued,2026-03-24 06:00,BRAVO,retry after validation error
+EVT-000724,SMP-2026-00145,reviewed,2026-03-24 16:00,DELTA,manual review
+EVT-000725,SMP-2026-00145,completed,2026-03-25 05:00,CHARLIE,automatic transition
+EVT-000726,SMP-2026-00146,received,2026-02-15 19:00,system,manual review
+EVT-000727,SMP-2026-00146,queued,16/02/2026 19:00,ALPHA,automatic transition
+EVT-000728,SMP-2026-00146,processed,17/02/2026 16:00,ALPHA,retry after validation error
+EVT-000729,SMP-2026-00146,reviewed,18/02/2026 16:00,ALPHA,manual review
+EVT-000730,SMP-2026-00146,completed,2026-02-19 09:00,ALPHA,
+EVT-000731,SMP-2026-00147,received,2026-02-26 22:00,DELTA,manual review
+EVT-000732,SMP-2026-00147,queued,27/02/2026 00:00,system,external API update
+EVT-000733,SMP-2026-00147,processed,27/02/2026 21:00,BRAVO,external API update
+EVT-000734,SMP-2026-00147,reviewed,2026-02-28 19:00,system,external API update
+EVT-000735,SMP-2026-00147,completed,2026-03-01 01:00,DELTA,automatic transition
+EVT-000736,SMP-2026-00148,received,2026-03-12 04:00,CHARLIE,manual review
+EVT-000737,SMP-2026-00148,queued,13/03/2026 10:00,ALPHA,manual review
+EVT-000738,SMP-2026-00148,processed,2026-03-13 15:00,DELTA,manual review
+EVT-000739,SMP-2026-00148,reviewed,14/03/2026 21:00,system,retry after validation error
+EVT-000740,SMP-2026-00148,completed,2026-03-15 16:00,DELTA,retry after validation error
+EVT-000741,SMP-2026-00149,received,2026-01-08 08:00,DELTA,manual review
+EVT-000742,SMP-2026-00149,queued,09/01/2026 19:00,ALPHA,external API update
+EVT-000743,SMP-2026-00149,processed,2026-01-10 18:00,ALPHA,automatic transition
+EVT-000744,SMP-2026-00149,reviewed,11/01/2026 08:00,ALPHA,
+EVT-000745,SMP-2026-00149,completed,2026-01-11 10:00,ALPHA,external API update
+EVT-000746,SMP-2026-00150,received,2026-02-19 06:00,ALPHA,manual review
+EVT-000747,SMP-2026-00150,queued,19/02/2026 17:00,BRAVO,automatic transition
+EVT-000748,SMP-2026-00150,processed,20/02/2026 07:00,system,automatic transition
+EVT-000749,SMP-2026-00150,reviewed,2026-02-21 12:00,CHARLIE,
+EVT-000750,SMP-2026-00150,completed,2026-02-22 17:00,CHARLIE,

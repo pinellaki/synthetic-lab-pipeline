@@ -1,0 +1,10 @@
+LAB SUMMARY REPORT
+Report No: TXT-010
+Sample: SMP-2026-00067
+Subject: SUBJ-0044
+Analyte: ALT - Alanine aminotransferase
+Result: 40.68 u/l
+QC: REVIEW
+Run time: 16/01/2026 23:00
+Reviewer: BRAVO
+Notes: repeat requested
