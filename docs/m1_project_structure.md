@@ -1,5 +1,5 @@
-\# M1 Project Structure
-## Summary
+M1 Project Structure
+Summary
 
 This document includes:
 
@@ -8,11 +8,8 @@ This document includes:
 - Logging, error, warning, and configuration plans
 
 
-\## 1. Project Tree
+1. Project Tree
 
-
-
-```text
 
 synthetic-lab-pipeline/
 
