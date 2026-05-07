@@ -1,0 +1,235 @@
+Database Organization Diagram
+
+This diagram shows how the database is organized at a conceptual level for the Synthetic Lab Pipeline.
+
+1. Entity Relationship Diagram
+
+erDiagram
+
+    DIM_SITE {
+        int site_key PK
+        string site_code UK
+        string site_name
+        string region
+        boolean active
+    }
+
+    DIM_SUBJECT {
+        int subject_key PK
+        string subject_id UK
+        string site_code FK
+        string sex
+        string birth_year
+        boolean active
+    }
+
+    DIM_ANALYTE {
+        int analyte_key PK
+        string analyte_code UK
+        string analyte_name
+        string canonical_unit
+        decimal ref_low
+        decimal ref_high
+        boolean active
+    }
+
+    SAMPLE {
+        int sample_key PK
+        string sample_id UK
+        int subject_key FK
+        int site_key FK
+        string sample_type
+        string priority
+        datetime collected_at
+        datetime received_at
+        decimal intake_temperature_c
+        string submission_status
+        string manual_note
+        datetime created_at
+    }
+
+    SHIPMENT {
+        int shipment_key PK
+        string shipment_id UK
+        string sample_id FK
+        string courier
+        datetime shipped_at
+        datetime received_at
+        decimal condition_temp_c
+        string shipment_status
+        datetime api_updated_at
+    }
+
+    ASSAY_RESULT {
+        int result_key PK
+        string result_id UK
+        string sample_id FK
+        int analyte_key FK
+        decimal result_value
+        string result_unit
+        string qc_status
+        int result_version
+        boolean is_current
+        boolean active
+        datetime run_datetime
+        string reviewer
+        datetime approved_at
+    }
+
+    WORKFLOW_EVENT {
+        int workflow_event_key PK
+        string event_id PK
+        string sample_id FK
+        string event_type
+        string event_status
+        string event_message
+        datetime event_time
+        string actor
+    }
+
+    REJECTED_RECORD {
+        int rejected_record_key PK
+        string source_name
+        string source_type
+        string source_record_id
+        string rule_id
+        string severity
+        string rejection_reason
+        datetime rejected_at
+    }
+
+    FEATURE_SAMPLE {
+        int feature_row_key PK
+        string sample_id FK
+        int subject_key FK
+        int site_key FK
+        string sample_type
+        string priority
+        decimal intake_temperature_c
+        decimal collection_to_received_hours
+        decimal shipment_delay_hours
+        boolean has_manual_note
+        boolean needs_repeat_before_review
+        datetime prediction_time
+    }
+
+    DIM_SITE ||--o{ DIM_SUBJECT : has
+    DIM_SITE ||--o{ SAMPLE : receives
+    DIM_SUBJECT ||--o{ SAMPLE : provides
+    SAMPLE ||--o| SHIPMENT : may_have
+    SAMPLE ||--o{ ASSAY_RESULT : has
+    DIM_ANALYTE ||--o{ ASSAY_RESULT : measures
+    SAMPLE ||--o{ WORKFLOW_EVENT : generates
+    SAMPLE ||--o| FEATURE_SAMPLE : produces
+    DIM_SUBJECT ||--o{ FEATURE_SAMPLE : linked_to
+    DIM_SITE ||--o{ FEATURE_SAMPLE : linked_to
+```
+
+2. Database Layers
+
+flowchart TB
+
+    A[Raw Files] --> B[Staging Tables]
+    B --> C[Dimension Tables]
+    B --> D[Core Fact Tables]
+    C --> E[Trusted Layer]
+    D --> E
+    E --> F[Feature Table]
+    B --> G[Rejected Records]
+```
+
+3. Table Organization
+
+Dimension tables
+
+These store reusable reference-style data.
+
+- dim_site
+- dim_subject
+- dim_analyte
+
+Core operational tables
+
+These store the main lab pipeline facts.
+
+- sample
+- shipment
+- assay_result
+- workflow_event
+
+Quality / audit table
+
+This stores failed or rejected inputs.
+
+- rejected_record
+
+ML / analytics table
+
+This stores leakage-safe features at sample level.
+
+- feature_sample
+
+4. Relationship Explanation
+
+ dim_site
+Stores collection-site information.  
+One site can have many subjects and many samples.
+
+ dim_subject
+Stores subject-level identifiers and attributes.  
+One subject can provide many samples.
+
+ sample
+This is the central operational table.  
+It connects intake/submission data to subjects and sites.  
+A sample can have one shipment record, multiple assay results, and multiple workflow events.
+
+ shipment
+Stores API-derived shipment information for a sample.  
+Useful for transport delay and temperature features.
+
+ dim_analyte
+Stores analyte reference information, such as analyte code, name, canonical unit, and expected reference range.
+
+ assay_result
+Stores measured results for each analyte on a sample.  
+A sample can have many assay results.  
+Versioning and `is_current` allow historical and current-result tracking.
+
+ workflow_event
+Stores process/status history for a sample.  
+A sample can have many workflow events over time.
+
+ rejected_record
+Stores records that fail validation, together with the rule that failed and the reason for rejection.
+
+ feature_sample
+Stores ML-ready features created at the sample level, using only information available at prediction time.
+
+ 5. Recommended Load Order
+
+The database should be populated in this order:
+
+1. dim_site
+2. dim_subject
+3. dim_analyte
+4. sample
+5. shipment
+6. assay_result
+7. workflow_event
+8. rejected_record
+9. feature_sample
+
+6. Key Constraints to Enforce
+
+- Every table should have a primary key.
+- Business identifiers such as sample_id, subject_id, site_code, and analyte_code should be unique where appropriate.
+- Foreign keys should link:
+  - sample.subject_key -> dim_subject.subject_key
+  - sample.site_key -> dim_site.site_key
+  - assay_result.sample_id -> sample.sample_id
+  - assay_result.analyte_key -> dim_analyte.analyte_key
+  - workflow_event.sample_id -> sample.sample_id
+  - shipment.sample_id -> sample.sample_id
+- Only one current assay result should exist for a given `(sample_id, analyte_key)` combination.
+- History should be preserved using fields such as `is_current`, `active`, or version fields rather than deleting rows.
