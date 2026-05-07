@@ -1,4 +1,4 @@
-\# Synthetic Lab Pipeline
+Synthetic Lab Pipeline
 
 
 
@@ -6,47 +6,46 @@ This repository contains the initial project structure for the Synthetic Lab Pip
 
 
 
-\## Project Structure
+Project Structure
 
 
 
 synthetic-lab-pipeline/
 
-\- data/
+- data/
 
-&#x20; - raw/
+- raw/
 
-&#x20; - staging/
+- staging/
 
-&#x20; - trusted/
+- trusted/
 
-&#x20; - rejected/
+- rejected/
 
-&#x20; - reports/
+- reports/
 
-\- docs/
+- docs/
 
-\- notebooks/
+- notebooks/
 
-\- scripts/
+- scripts/
 
-\- sql/
+- sql/
 
-\- src/
+- src/
 
-\- tests/
+- tests/
 
 
 
-\## Purpose
+Purpose
 
 
 
 The goal of this project is to organize raw input data, processing scripts, SQL files, documentation, tests, and reporting outputs in a clean and version-controlled structure.
 
 
-
-\## Branch
+Branch
 
 
 
