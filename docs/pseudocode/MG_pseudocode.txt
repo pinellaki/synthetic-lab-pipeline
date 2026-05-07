@@ -1,0 +1,56 @@
+CREATE repository synthetic-lab-pipeline
+
+CREATE folders = [
+    data,
+    docs,
+    notebooks,
+    scripts,
+    sql,
+    src,
+    tests
+]
+
+CREATE files = [
+    README.md,
+    .gitignore
+]
+
+FOREACH folder IN folders:
+    ADD folder TO repository
+
+FOREACH file IN files:
+    ADD file TO repository
+
+CREATE gitignore_rules = [
+    virtual_environments,
+    cache_files,
+    temporary_files,
+    logs,
+    local_settings,
+    secrets,
+    api_keys
+]
+
+FOREACH rule IN gitignore_rules:
+    ADD rule TO .gitignore
+
+CREATE branch FROM main
+
+FOREACH task IN module_work:
+    MAKE small_change
+    CHECK git_status
+
+    IF change_is_correct:
+        ADD intended_files
+        COMMIT with_clear_message
+        PUSH branch
+        OPEN pull_request
+    ELSE:
+        FIX change_before_commit
+
+IF file_committed_by_mistake:
+    CREATE fixing_commit
+ELSE:
+    CONTINUE normal_workflow
+
+END

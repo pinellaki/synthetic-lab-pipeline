@@ -1,0 +1,58 @@
+CREATE pipeline_plan
+
+CREATE raw_sources = [
+    sample_submissions,
+    assay_results,
+    compound_batches,
+    lab_orders,
+    api_pages,
+    text_reports,
+    pdf_reports,
+    reference_files
+]
+
+FOREACH source IN raw_sources:
+    IDENTIFY source_promise
+    IDENTIFY source_risks
+    RECORD source_filename
+    RECORD source_row_or_page_or_sheet
+    KEEP raw_source_unchanged
+
+CREATE pipeline_stages = [
+    raw_input,
+    ingestion,
+    standardization,
+    validation,
+    rejected_or_warning_output,
+    staging,
+    trusted_tables,
+    feature_table,
+    reports
+]
+
+FOREACH record IN ingested_records:
+    IF record_has_critical_error:
+        SEND record TO data/rejected
+        LOG rejection_reason
+    ELSE IF record_has_warning:
+        SEND warning TO data/reports
+        CONTINUE processing
+    ELSE:
+        SEND record TO data/staging
+
+IF feature_created_after_prediction_time:
+    BLOCK feature
+    LOG leakage_warning
+ELSE:
+    ALLOW feature
+
+CREATE run_log WITH:
+    run_id,
+    start_time,
+    end_time,
+    files_processed,
+    accepted_records,
+    rejected_records,
+    warnings
+
+END
