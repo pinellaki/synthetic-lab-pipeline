@@ -1,0 +1,93 @@
+Rejection Rules Mermaid Diagram
+
+
+flowchart LR
+
+    %% -------------------------
+    %% INPUT EXAMPLES
+    %% -------------------------
+    A1["EX001<br/>sample_submissions<br/>sample_id duplicated after standardization<br/>sample_id = SMP-2026-00022"]
+    A2["EX002<br/>sample_submissions<br/>subject_id contains PII-like value<br/>mario.rossi@example.com"]
+    A3["EX003<br/>assay_results<br/>negative result_value<br/>sample_id = SMP-2026-00041<br/>analyte = GLU<br/>result_value = -90.43<br/>unit = MG/DL"]
+    A4["EX004<br/>assay_results<br/>two current versions<br/>sample_id = SMP-2026-00006<br/>analyte = GLU<br/>version 1 is_current = yes<br/>version 2 is_current = true"]
+    A5["EX005<br/>workflow_events<br/>invalid chronology<br/>sample_id = SMP-2026-00001<br/>reviewed -> completed -> received -> queued -> processed"]
+    A6["EX006<br/>feature_table candidate<br/>leakage columns after prediction time<br/>qc_status, review_status, result_value"]
+
+    %% -------------------------
+    %% VALIDATION RULES
+    %% -------------------------
+    VR1["VR001<br/>sample_id required and unique<br/>Severity: CRITICAL"]
+    VR2["VR002<br/>subject_id must match SUBJ-####<br/>and contain no PII<br/>Severity: HIGH"]
+    VR4["VR004<br/>result_value must be numeric<br/>and non-negative<br/>Severity: CRITICAL"]
+    VR5["VR005<br/>unit must map to canonical analyte unit<br/>Severity: HIGH"]
+    VR6["VR006<br/>only one current result version<br/>per sample/analyte<br/>Severity: CRITICAL"]
+    VR7["VR007<br/>workflow status must follow<br/>valid chronology<br/>Severity: MEDIUM"]
+    VR8["VR008<br/>no leakage columns after prediction time<br/>Severity: CRITICAL"]
+
+    %% -------------------------
+    %% DECISIONS
+    %% -------------------------
+    D1["Reject record / block load"]
+    D2["Reject or send to manual review queue"]
+    D3["Warning + review queue if downstream safe"]
+    D4["Block feature from trusted feature table"]
+
+    %% -------------------------
+    %% OUTPUT TABLES / RESULTS
+    %% -------------------------
+    R1["rejected_record<br/>Fields:<br/>rejected_record_id<br/>source_record_id<br/>rule_id<br/>severity<br/>rejection_reason<br/>rejected_at"]
+    R2["manual_review_queue<br/>Fields:<br/>review_item_id<br/>source_record_id<br/>rule_id<br/>assigned_to<br/>queue_status<br/>created_at"]
+    R3["dq_warning_log<br/>Fields:<br/>warning_id<br/>source_record_id<br/>rule_id<br/>severity<br/>warning_message<br/>created_at"]
+    R4["blocked_feature<br/>Fields:<br/>blocked_feature_id<br/>feature_name<br/>rule_id<br/>reason<br/>blocked_at"]
+
+    %% -------------------------
+    %% RELATIONS
+    %% -------------------------
+    A1 --> VR1
+    A2 --> VR2
+    A3 --> VR4
+    A4 --> VR6
+    A4 --> VR5
+    A5 --> VR7
+    A6 --> VR8
+
+    VR1 --> D1
+    VR2 --> D2
+    VR4 --> D1
+    VR5 --> D2
+    VR6 --> D1
+    VR7 --> D3
+    VR8 --> D4
+
+    D1 --> R1
+    D2 --> R2
+    D3 --> R3
+    D4 --> R4
+
+    %% -------------------------
+    %% NOTES
+    %% -------------------------
+    N1["Note:<br/>If standardization fixes the value<br/>(for example lowercase IDs or known unit variants),<br/>normalize first and reject only if still invalid."]
+
+    N2["Prediction time note:<br/>For ML features, prediction time is immediately after intake.<br/>Fields such as qc_status, review_status, approved_at,<br/>result_value, and final workflow status are forbidden."]
+
+    N1 -.-> VR1
+    N1 -.-> VR5
+    N2 -.-> VR8
+
+    %% -------------------------
+    %% STYLES
+    %% -------------------------
+    classDef critical fill:#ffe5e5,stroke:#d62828,stroke-width:2px,color:#111;
+    classDef high fill:#fff0e0,stroke:#f77f00,stroke-width:2px,color:#111;
+    classDef medium fill:#fff7d6,stroke:#e0a800,stroke-width:2px,color:#111;
+    classDef decision fill:#eef4ff,stroke:#3366cc,stroke-width:1.5px,color:#111;
+    classDef result fill:#f5f5f5,stroke:#666,stroke-width:1.5px,color:#111;
+    classDef note fill:#eef8ff,stroke:#4a90e2,stroke-dasharray: 5 5,color:#111;
+
+    class VR1,VR4,VR6,VR8 critical;
+    class VR2,VR5 high;
+    class VR7 medium;
+    class D1,D2,D3,D4 decision;
+    class R1,R2,R3,R4 result;
+    class N1,N2 note;
