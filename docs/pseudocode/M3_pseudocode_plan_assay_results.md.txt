@@ -1,0 +1,76 @@
+M3 pseudocode for assay_results.csv
+
+Start with raw assay_results staging data.
+
+Keep raw values for audit:
+- sample_id_raw
+- analyte_code_raw
+- result_value_raw
+- unit_raw
+- run_datetime_raw
+- qc_status_raw
+- review_status_raw
+- approved_at_raw
+- is_current_raw
+- deleted_at_raw
+
+Trim whitespace from text fields.
+
+Standardize sample_id:
+- uppercase letters
+- remove surrounding spaces
+- convert smp-2026-00042 to SMP-2026-00042
+- reject/review if missing or malformed
+
+Validate sample relationship:
+- check sample_id exists in accepted sample records
+- if not, mark as orphan result and review/reject
+
+Standardize analyte_code:
+- uppercase
+- remove spaces
+- check it exists in analyte_reference.csv
+- reject/review if unknown
+
+Parse result_value:
+- convert decimal comma to decimal dot if safe
+- convert to numeric
+- reject if not numeric
+- reject if negative
+- flag outliers or outside reference range for review
+
+Standardize unit:
+- map messy units to canonical units
+- examples:
+  MG/DL to mg/dL
+  mg_per_dl to mg/dL
+  mg dl to mg/dL
+  u/l to U/L
+  units/L to U/L
+  mmol per L to mmol/L
+  MMOL/L to mmol/L
+- if unit is recognized, accept with warning if changed
+- if unit is unknown, review/reject
+
+Parse run_datetime and approved_at:
+- support known date formats
+- reject/review if required date cannot be parsed
+- review/reject if approved_at is before run_datetime
+
+Standardize status fields:
+- qc_status should be OK, PASS, REVIEW, or FAIL
+- review_status should be from allowed values if defined
+- unknown statuses should be reviewed
+
+Standardize version and is_current:
+- parse version as integer
+- map is_current to true/false
+- for each sample_id + analyte_code, allow only one current record
+- if multiple current records exist, block/review
+- if deleted_at exists and is_current is true, review/reject
+
+After all rules:
+- save accepted assay result records
+- save rejected result records with rule ID and reason
+- save warning records
+- summarize counts in validation report
