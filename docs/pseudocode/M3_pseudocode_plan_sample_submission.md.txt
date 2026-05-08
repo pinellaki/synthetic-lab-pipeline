@@ -1,0 +1,53 @@
+M3 pseudocode for sample_submissions.csv
+
+Start with raw sample_submissions staging data.
+
+Keep raw values for audit:
+- sample_id_raw
+- subject_id_raw
+- collection_datetime_raw
+- received_datetime_raw
+- consent_recorded_raw
+- intake_temperature_c_raw
+
+Trim whitespace from text fields.
+
+Standardize sample_id:
+- uppercase letters
+- remove surrounding spaces
+- keep expected format SMP-YYYY-NNNNN
+- if lowercase but fixable, accept with warning
+- if missing or malformed, reject or review
+
+Standardize subject_id:
+- uppercase letters
+- remove surrounding spaces
+- check expected format SUBJ-NNNN
+- if value looks like email, phone number, or real name, quarantine/review
+
+Parse collection_datetime and received_datetime:
+- support known date formats
+- keep raw date string
+- create standardized datetime columns
+- if date cannot be parsed, reject/review
+- if collection_datetime is after received_datetime, reject/review
+
+Standardize booleans:
+- map yes/Y/1/true to true
+- map no/N/0/false to false
+- if unknown value appears, review
+
+Parse intake_temperature_c:
+- convert to numeric
+- if not numeric, reject/review
+- if extreme or suspicious, warning/review
+
+Validate collection_site:
+- check site exists in sites reference table
+- if missing or unknown, review/reject
+
+After all rules:
+- save accepted sample records
+- save rejected sample records with rule ID and reason
+- save warning records
+- summarize counts in validation report
