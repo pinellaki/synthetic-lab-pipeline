@@ -1,0 +1,58 @@
+M2 ingestion pseudocode plan
+
+Start a new pipeline run and create run_id.
+
+Create an inventory of all source files:
+- CSV files
+- Excel workbook
+- JSON shipment pages
+- text reports
+- PDF reports
+- reference files
+- schema and documentation files
+
+For every CSV source:
+- read the file with IDs and important fields as text
+- do not rely on automatic type inference
+- add source_file, source_row, run_id, and ingested_at
+- keep raw values before cleaning
+
+For the Excel workbook:
+- read every expected sheet, not only the first sheet
+- expected sheets are Orders, ManualCorrections, and ReferenceLimits
+- add source_file, source_sheet, source_row, run_id, and ingested_at
+
+For the JSON shipment API exports:
+- start from shipments_page_1.json
+- read page, page_size, next_page, and data
+- extract shipment records from data
+- follow next_page until next_page is null
+- add source_file, source_page, source_record_index, run_id, and ingested_at
+- raise an error if a required next page is missing
+
+For text reports:
+- read each report as plain text
+- extract report_no, sample_id, subject_id, analyte, result value, unit, QC, run time, reviewer, and notes
+- keep raw values
+- add source_file, run_id, and ingested_at
+
+For PDF reports:
+- extract text from each PDF
+- parse the same fields as text reports
+- keep raw extracted text if possible for audit
+- add source_file, source_page, run_id, and ingested_at
+
+For reference CSVs:
+- read analyte reference, sites, validation rules, and data dictionary
+- preserve them as reference/staging data
+- use them later for validation and cleaning
+
+For every source:
+- log file read started
+- log file read completed
+- log record count
+- log warnings or extraction problems
+- do not silently drop records
+
+The result of M2 should be staging data, not final trusted data.
+Cleaning and validation happen later.

@@ -1,0 +1,97 @@
+M2 Pseudocode — Reading Raw Inputs
+
+START
+
+CREATE raw_source_inventory
+
+CREATE source_types = [
+    csv_files,
+    excel_workbooks,
+    json_api_pages,
+    text_reports,
+    pdf_reports,
+    reference_files,
+    sql_files,
+    target_definition
+]
+
+FOREACH source_type IN source_types:
+    IDENTIFY files_to_read
+    IDENTIFY reader_strategy
+    IDENTIFY expected_output_records
+    IDENTIFY source_metadata_needed
+    IDENTIFY ingestion_risks
+
+FOR CSV files:
+    READ all columns as text first
+    PRESERVE original values
+    ADD source_filename
+    ADD source_row_number
+    OUTPUT raw tabular records
+
+FOR Excel files:
+    READ every required sheet
+    PRESERVE sheet_name
+    ADD source_filename
+    ADD source_sheet_name
+    ADD source_row_number
+    OUTPUT raw sheet records
+
+FOR JSON API pages:
+    READ first page
+    EXTRACT data records
+    RECORD page_number
+    RECORD source_filename
+    IF next_page exists:
+        READ next_page
+    ELSE:
+        STOP pagination
+    OUTPUT combined shipment records
+
+FOR text reports:
+    READ full text
+    EXTRACT report number, sample ID, subject ID, analyte, result, QC, run time, reviewer, notes
+    ADD source_filename
+    OUTPUT raw report records
+
+FOR PDF reports:
+    EXTRACT text from PDF first
+    THEN parse fields from extracted text
+    ADD source_filename
+    ADD source_page_number
+    OUTPUT raw report records
+
+FOR each record:
+    KEEP raw value unchanged
+    DO NOT standardize yet
+    DO NOT validate yet
+    ATTACH source metadata
+
+IF file is missing:
+    LOG error
+
+ELSE IF optional file is missing:
+    LOG warning
+
+IF reader cannot parse file:
+    LOG error and send file to review
+
+ELSE:
+    SAVE raw extracted records for later standardization
+
+END
+
+## M2 Source Inventory
+
+| Source                | Reader strategy                                             | Expected output record                             | Three ingestion risks |
+|                    ---|---                                                          |---|---|
+|sample_submissions.csv | CSV reader; read columns as text first                      |Raw sample submission records                       |IDs may change if        													inferred;dates have mixed formats;booleans may use TRUE/FALSE/yes/no/Y 
+|assay_results.csv      | CSV reader; read result values and IDs as text first        |Raw assay result records                            |Decimal commas may parse wrong; 														      units vary; current-version flags may be inconsistent
+|compound_batches.csv   | CSV reader; read IDs, units, and active flags as text first |Raw compound batch records                          |Units may vary; soft-delete 														flags may be unclear; concentration values may parse wrong 
+|lab_orders.xlsx        | Excel reader; read all required sheets                      |Raw order, correction, and reference-limit records  |Excel may have multiple sheets; 													  	         mixed cell types; manual corrections may be missed
+|api_pages/*.json       | JSON reader with pagination loop | Raw shipment records     |next_page may be missed; blank received_at; statuses may conflict with dates
+|text_reports/*.txt     | Text reader plus field extraction | Raw lab report records  |Greedy text extraction; manually typed units; mixed date formats 
+|pdf_reports/*.pdf      | PDF text extraction first, field parsing second             |Raw PDF report records                              |PDF text extraction may distort 															 layout; fields may be missed; units/dates may vary 
+|reference/*.csv        | CSV reader; read as reference tables                        |Raw reference records                               |Missing reference rows; 														         inconsistent keys; reference values may not match raw data 
+|sql/target_schema.sql  | Text/SQL reader                                             |Schema reference text                               |Not raw data; table names may 												      differ from implementation; constraints must be interpreted carefully 
+|target_definition.md   | Markdown/text reader                                        |Target and leakage-rule notes                       |Not tabular data; leakage rules 															  may be ignored; prediction time must be respected
