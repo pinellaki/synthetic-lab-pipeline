@@ -1,680 +1,506 @@
-\# M5 Database Design
+# M5 Database Design
 
+## Purpose
 
-
-\## Purpose
-
-
-
-This document explains the database design for the Synthetic Lab Pipeline project
-
-
+This document explains the database design for the Synthetic Lab Pipeline project.
 
 The goal of M5 is to define a clean database structure that supports:
 
-
-
-\- normalized source-of-truth tables
-
-\- clear primary keys and foreign keys
-
-\- quality checks
-
-\- future reporting queries
-
-\- future feature engineering
-
-\- possible denormalized outputs if queries become too complex
-
-
+- normalized source-of-truth tables
+- clear primary keys and foreign keys
+- quality checks
+- future reporting queries
+- future feature engineering
+- possible denormalized outputs if queries become too complex
 
 The related SQL files are:
 
-
-
 ```text
+sql/m5_database_schema.sql
+sql/quality_checks.sql
+```
 
-sql/m5\_database\_schema.sql
+---
 
-sql/quality\_checks.sql
+## Main Design Idea
 
+The database is designed with a normalized structure first.
 
-
-\## Main Design Idea
-
-The database is designed with a normalized structure first
-
-This means that each table should store one main type of information
-
-
+This means that each table should store one main type of information.
 
 For example:
 
-\-sample stores sample intake information
+- `sample` stores sample intake information
+- `assay_result` stores lab measurement results
+- `shipment` stores shipment events
+- `workflow_event` stores workflow history
+- `dim_site` stores site reference information
+- `dim_analyte` stores analyte reference information
+- `validation_rule` stores validation rule definitions
+- `validation_result` stores validation outcomes
+- `rejected_record` stores rejected or review records
 
-\-assay\_result stores lab measurement results
+The normalized tables are the source of truth.
 
-\-shipment stores shipment events
+---
 
-\-workflow\_event stores workflow history
+## Why Normalization Is Used
 
-\-dim\_site stores site reference information
+Normalization helps avoid duplicated and inconsistent data.
 
-\-dim\_analyte stores analyte reference information
-
-\-validation\_rule stores validation rule definitions
-
-\-validation\_result stores validation outcomes
-
-\-rejected\_record stores rejected or review records
-
-
-
-The normalized tables are the source of truth
-
-
-
-\## Why Normalization Is Used
-
-Normalization helps avoid duplicated and inconsistent data
-
-
-
-For example, site information should not be repeated inside every sample row
-
-
+For example, site information should not be repeated inside every sample row.
 
 Instead of storing this repeatedly:
 
-
-
-sample\_id | site\_code | site\_name | country | site\_type
-
-
+```text
+sample_id | site_code | site_name | country | site_type
+```
 
 the design stores site information once in:
 
-dim\_site
+```text
+dim_site
+```
 
+and the `sample` table references it through:
 
+```text
+collection_site_code
+```
 
-and the sample table references it through:
+This keeps the schema cleaner and makes updates safer.
 
-collection\_site\_code
+---
 
+## Normalized Tables
 
-
-This keeps the schema cleaner and makes updates safer
-
-
-
-\## Normalized Tables
-
-
-
-\### dim\_site
+### `dim_site`
 
 Stores controlled site information.
 
-
-
 Primary key:
 
-site\_code
-
-
+```text
+site_code
+```
 
 Used by:
 
-sample.collection\_site\_code
-
-
+```text
+sample.collection_site_code
+```
 
 Relationship:
 
-dim\_site 1 -> many sample
+```text
+dim_site 1 -> many sample
+```
 
+---
 
-
-\### dim\_analyte
+### `dim_analyte`
 
 Stores controlled analyte information.
 
-
-
 Primary key:
 
-analyte\_code
-
-
+```text
+analyte_code
+```
 
 Stores:
 
-\-analyte name
-
-\-canonical unit
-
-\-reference low value
-
-\-reference high value
-
-
+- analyte name
+- canonical unit
+- reference low value
+- reference high value
 
 Used by:
 
-assay\_result.analyte\_code
-
-
+```text
+assay_result.analyte_code
+```
 
 Relationship:
 
-dim\_analyte 1 -> many assay\_result
+```text
+dim_analyte 1 -> many assay_result
+```
 
+---
 
+### `validation_rule`
 
-\### validation\_rule
-
-Stores validation rule definitions
-
-
+Stores validation rule definitions.
 
 Primary key:
 
-rule\_id
-
-
+```text
+rule_id
+```
 
 Used by:
 
-validation\_result.rule\_id
+```text
+validation_result.rule_id
+rejected_record.rule_id
+```
 
-rejected\_record.rule\_id
+This makes validation and rejection results auditable.
 
+---
 
-
-This makes validation and rejection results auditable
-
-
-
-\### sample
+### `sample`
 
 Stores one row per lab sample.
 
-
-
 Primary key:
 
-sample\_id
-
-
+```text
+sample_id
+```
 
 Foreign key:
 
-collection\_site\_code -> dim\_site.site\_code
+```text
+collection_site_code -> dim_site.site_code
+```
 
-
-
-This table comes mainly from cleaned and standardized sample\_submissions.csv.
-
-
+This table comes mainly from cleaned and standardized `sample_submissions.csv`.
 
 Important rule:
 
-collection\_datetime must not be after received\_datetime
+```text
+collection_datetime must not be after received_datetime
+```
 
+---
 
-
-\### assay\_result
+### `assay_result`
 
 Stores lab measurement results.
 
-
-
 Primary key:
 
-result\_id
-
-
+```text
+result_id
+```
 
 Foreign keys:
 
-sample\_id -> sample.sample\_id
-
-analyte\_code -> dim\_analyte.analyte\_code
-
-
+```text
+sample_id -> sample.sample_id
+analyte_code -> dim_analyte.analyte_code
+```
 
 Important rules:
 
-result\_value must be non-negative
-
+```text
+result_value must be non-negative
 deleted records should not be current
-
-
+```
 
 This table supports checks for:
 
-\-orphan assay results
+- orphan assay results
+- duplicate current results
+- reference range violations
+- unit mismatches
 
-\-duplicate current results
+---
 
-\-reference range violations
-
-\-unit mismatches
-
-
-
-\### shipment
+### `shipment`
 
 Stores shipment records from paginated JSON files.
 
-
-
 Primary key:
 
-shipment\_id
-
-
+```text
+shipment_id
+```
 
 Foreign key:
 
-sample\_id -> sample.sample\_id
-
-
+```text
+sample_id -> sample.sample_id
+```
 
 Important rule:
 
-shipped\_at must not be after received\_at
-
-
+```text
+shipped_at must not be after received_at
+```
 
 This table supports checks for:
 
-delayed shipments
+- delayed shipments
+- delivered shipments missing `received_at`
 
-delivered shipments missing received\_at
+---
 
-
-
-\### workflow\_event
+### `workflow_event`
 
 Stores sample workflow history.
 
-
-
 Primary key:
 
-event\_id
-
-
+```text
+event_id
+```
 
 Foreign key:
 
-sample\_id -> sample.sample\_id
-
-
+```text
+sample_id -> sample.sample_id
+```
 
 A sample can have many workflow events.
 
-
-
 This table is important because workflow messages may contain useful information such as:
 
+```text
 retry
-
 repeat
+```
 
+---
 
-
-\### validation\_result
+### `validation_result`
 
 Stores validation outcomes.
 
-
-
 Primary key:
 
-validation\_result\_id
-
-
+```text
+validation_result_id
+```
 
 Foreign key:
 
-rule\_id -> validation\_rule.rule\_id
-
-
+```text
+rule_id -> validation_rule.rule_id
+```
 
 This table is separated from business tables because validation results are audit information.
 
+---
 
-
-\### rejected\_record
+### `rejected_record`
 
 Stores records rejected or sent to review.
 
-
-
 Primary key:
 
-rejected\_record\_id
-
-
+```text
+rejected_record_id
+```
 
 Foreign key:
 
-rule\_id -> validation\_rule.rule\_id
-
-
+```text
+rule_id -> validation_rule.rule_id
+```
 
 This table keeps rejected data traceable.
 
-
-
 It stores:
 
-\-source table
+- source table
+- source record ID
+- source file
+- source row
+- rule ID
+- severity
+- rejection reason
+- raw payload
+- run ID
 
-\-source record ID
+---
 
-\-source file
+## Primary Keys
 
-\-source row
+Primary keys uniquely identify one row.
 
-\-rule ID
+Examples:
 
-\-severity
+```text
+sample.sample_id
+assay_result.result_id
+shipment.shipment_id
+workflow_event.event_id
+dim_site.site_code
+dim_analyte.analyte_code
+validation_rule.rule_id
+```
 
-\-rejection reason
+Primary keys are important because every important record must be traceable.
 
-\-raw payload
+---
 
-\-run ID
-
-
-
-\### Primary Keys
-
-
-
-Primary keys uniquely identify one row
-
-
-
-sample.sample\_id
-
-assay\_result.result\_id
-
-shipment.shipment\_id
-
-workflow\_event.event\_id
-
-dim\_site.site\_code
-
-dim\_analyte.analyte\_code
-
-validation\_rule.rule\_id
-
-
-
-Primary keys are important because every important record must be traceable
-
-
-
-\### Foreign Keys
+## Foreign Keys
 
 Foreign keys connect tables.
 
-
-
 Main relationships:
 
-sample.collection\_site\_code -> dim\_site.site\_code
+```text
+sample.collection_site_code -> dim_site.site_code
+assay_result.sample_id -> sample.sample_id
+assay_result.analyte_code -> dim_analyte.analyte_code
+shipment.sample_id -> sample.sample_id
+workflow_event.sample_id -> sample.sample_id
+validation_result.rule_id -> validation_rule.rule_id
+rejected_record.rule_id -> validation_rule.rule_id
+```
 
-assay\_result.sample\_id -> sample.sample\_id
+Foreign keys help protect data integrity.
 
-assay\_result.analyte\_code -> dim\_analyte.analyte\_code
+For example, an assay result should belong to an existing sample.
 
-shipment.sample\_id -> sample.sample\_id
+---
 
-workflow\_event.sample\_id -> sample.sample\_id
-
-validation\_result.rule\_id -> validation\_rule.rule\_id
-
-rejected\_record.rule\_id -> validation\_rule.rule\_id
-
-
-
-Foreign keys help protect data integrity
-
-For example, an assay result should belong to an existing sample
-
-
-
-\### Index Plan
-
+## Index Plan
 Indexes are added to support common joins, filters, and quality checks
-
-
 
 Indexes are useful on columns commonly used in:
 
-JOIN
-
-WHERE
-
-GROUP BY
-
-ORDER BY
-
-
+- `JOIN`
+- `WHERE`
+- `GROUP BY`
+- `ORDER BY`
 
 Important indexes include:
 
-\-sample.collection\_site\_code
+- `sample.collection_site_code`
+- `sample.subject_id`
+- `assay_result.sample_id`
+- `assay_result.analyte_code`
+- `assay_result.sample_id + analyte_code + is_current`
+- `shipment.sample_id`
+- `shipment.status`
+- `workflow_event.sample_id`
+- `workflow_event.event_timestamp`
+- `validation_result.rule_id`
+- `validation_result.source_table + source_record_id`
+- `rejected_record.rule_id`
+- `rejected_record.source_table + source_record_id`
 
-\-sample.subject\_id
+Indexes should not be added randomly to every column.
 
-\-assay\_result.sample\_id
-
-\-assay\_result.analyte\_code
-
-\-assay\_result.sample\_id + analyte\_code + is\_current
-
-\-shipment.sample\_id
-
-\-shipment.status
-
-\-workflow\_event.sample\_id
-
-\-workflow\_event.event\_timestamp
-
-\-validation\_result.rule\_id
-
-\-validation\_result.source\_table + source\_record\_id
-
-\-rejected\_record.rule\_id
-
-\-rejected\_record.source\_table + source\_record\_id
+They help read performance, but too many indexes can slow down inserts and updates.
 
 
-
-Indexes should not be added randomly to every column
-
-They help read performance, but too many indexes can slow down inserts and updates
-
-
-
-\### Quality Checks
+## Quality Checks
 
 The file:
 
-sql/quality\_checks.sql
+```text
+sql/quality_checks.sql
+```
 
 contains SQL queries used to inspect data quality after records are loaded.
 
-
-
 The checks include:
-
-\-Orphan assay results
-
-\-Duplicate current result versions
-
-\-Detailed duplicate current result rows
-
-\-Samples without workflow events
-
-\-Current results outside reference range
-
-\-Unit mismatches before reference-range comparison
-
-\-Delayed shipments
-
-\-Delivered shipments missing received\_at
-
-
+- orphan assay results
+- duplicate current result versions
+- detailed duplicate current result rows
+- samples without workflow events
+- current results outside reference range
+- unit mismatches before reference-range comparison
+- delayed shipments
+- delivered shipments missing `received_at`
 
 Some checks should return zero rows
 
 Example:
 
+```text
 orphan assay results should return zero rows
-
-
+```
 
 Other checks may return rows for review
 
 Example:
 
+```text
 current results outside reference range may exist and should be reviewed
+```
 
-
-
-\### View Design
+## View Design
 
 The schema includes:
 
-sample\_quality\_summary\_view
-
-
+```text
+sample_quality_summary_view
+```
 
 A view is a saved query
-
 It reads from normalized source tables and simplifies repeated joins
 
-
-
 The view combines information from:
+- `sample`
+- `dim_site`
+- `assay_result`
+- `shipment`
+- `workflow_event`
 
-\-sample
+The view is useful for reporting and future feature exploration.
 
-\-dim\_site
-
-\-assay\_result
-
-\-shipment
-
-\-workflow\_event
-
-
-
-The view is useful for reporting and future feature exploration
-
-
-
-\## View vs Denormalized Table
-
-A view does not duplicate data.
-
+## View vs Denormalized Table
+A view does not duplicate data
 It uses the normalized source tables when queried
 
-
-
 This is useful because:
+- source tables remain the source of truth
+- logic is centralized
+- data is not copied unnecessarily
 
-\-source tables remain the source of truth
+However, if the view becomes slow or too complex, it can later be converted into a denormalized physical table
 
-\-logic is centralized
+---
 
-\-data is not copied unnecessarily
-
-
-
-However, if the view becomes slow or too complex, it can later be converted into a denormalized physical table.
-
-
-
-\## Denormalization Plan
-
-Normalization is the default design choice, but it is not always the best final solution.
-
-
+## Denormalization Plan
+Normalization is the default design choice, but it is not always the best final solution
 
 Denormalization may be useful when:
-
-\-queries become too complicated
-
-\-too many joins are required
-
-\-reporting becomes slow
-
-\-ML feature generation needs one ready-to-use table
-
-\-the same joined dataset is used repeatedly
-
-
+- queries become too complicated
+- too many joins are required
+- reporting becomes slow
+- ML feature generation needs one ready-to-use table
+- the same joined dataset is used repeatedly
 
 A future denormalized table could be:
 
-sample\_quality\_summary
+```text
+sample_quality_summary
+```
 
 or:
 
-sample\_feature\_table
-
-
+```text
+sample_feature_table
+```
 
 This table could store precomputed values such as:
-
-\-assay result count
-
-\-shipment count
-
-\-workflow event count
-
-\-collection-to-received delay
-
-\-shipment transit hours
-
-\-retry/repeat message flag
-
-
+- assay result count
+- shipment count
+- workflow event count
+- collection-to-received delay
+- shipment transit hours
+- retry/repeat message flag
 
 The normalized tables would still remain the source of truth
 
-
-
-\## Why Not Denormalize Immediately
-
+## Why Not Denormalize Immediately
 The project starts with normalization because the relationships are still important and the schema should remain auditable
 
-
-
 Denormalizing too early can create problems:
+- duplicated data
+- stale values
+- more refresh logic
+- harder debugging
+- unclear source of truth
 
-\-duplicated data
-
-\-stale values
-
-\-more refresh logic
-
-\-harder debugging
-
-\-unclear source of truth
-
-
-
-For this reason, M5 uses a view first.
+For this reason, M5 uses a view first
 
 A physical denormalized table can be added later only if there is a clear performance or usability need
-
