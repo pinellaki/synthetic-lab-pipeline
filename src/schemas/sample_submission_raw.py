@@ -18,19 +18,9 @@ class SampleSubmissionRaw(BaseModel):
     Most fields are optional because raw input files may contain missing,
     incomplete, or malformed values.
 
-    Attributes:
-        sample_id: Raw sample identifier from the source file.
-        subject_id: Raw subject identifier connected to the sample.
-        collection_site: Raw collection site value.
-        sample_type: Raw sample type value.
-        collection_datetime: Raw collection datetime value as text.
-        received_datetime: Raw received datetime value as text.
-        priority: Raw priority value.
-        consent_recorded: Raw consent value before boolean standardization.
-        intake_temperature_c: Raw intake temperature value before numeric
-            validation.
-        operator_notes: Free-text notes entered by the operator.
-        metadata: Ingestion metadata describing where the record came from.
+    The model stores sample identifiers, subject identifiers, collection
+    details, received datetime values, priority, consent information, intake
+    temperature, operator notes, and ingestion metadata.
     """
 
     sample_id: str | None = None

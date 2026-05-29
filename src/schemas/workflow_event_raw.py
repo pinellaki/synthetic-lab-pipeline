@@ -18,15 +18,9 @@ class WorkflowEventRaw(BaseModel):
     file. Workflow events describe the history of what happened to a sample
     during the pipeline.
 
-    Fields:
-        event_id: Raw unique identifier for the workflow event.
-        sample_id: Raw sample identifier connected to the workflow event.
-        event_status: Raw workflow status, such as received, reviewed,
-            approved, repeated, rejected, or completed.
-        event_timestamp_raw: Raw datetime when the workflow event happened.
-        actor: Raw user, system, or process that created the event.
-        message: Raw free-text workflow message or note.
-        metadata: Ingestion metadata describing where the record came from.
+    The model stores event identifiers, sample identifiers, event status,
+    event timestamp, actor information, workflow messages, and ingestion
+    metadata.
     """
 
     event_id: str | None = None

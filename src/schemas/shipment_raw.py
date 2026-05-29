@@ -18,18 +18,9 @@ class ShipmentRaw(BaseModel):
     API response. Most fields are optional because shipment data can be missing,
     delayed, incomplete, or updated later.
 
-    Fields:
-        shipment_id: Raw unique identifier for the shipment.
-        sample_id: Raw sample identifier connected to the shipment.
-        courier: Raw courier or carrier name.
-        shipped_at_raw: Raw datetime when the shipment was sent.
-        received_at_raw: Raw datetime when the shipment was received.
-        condition_temp_c_raw: Raw shipment temperature value before numeric
-            validation.
-        status: Raw shipment status, such as delivered, delayed, pending, or
-            cancelled.
-        api_updated_at_raw: Raw datetime when the API record was last updated.
-        metadata: Ingestion metadata describing where the record came from.
+    The model stores shipment identifiers, sample identifiers, courier
+    information, shipped and received datetime values, shipment temperature,
+    status, API update time, and ingestion metadata.
     """
 
     shipment_id: str | None = None

@@ -16,14 +16,8 @@ class ValidationResult(BaseModel):
     A ValidationResult is returned by validation functions to describe whether
     a rule passed or failed.
 
-    Fields:
-        is_valid: True if the validation rule passed, False if it failed.
-        rule_id: Identifier of the validation rule that was evaluated.
-        severity: Severity level of the rule failure, such as medium, high, or
-            critical.
-        message: Human-readable explanation of the validation result.
-        action: Recommended action when the rule fails, such as reject, review,
-            warn, or standardize.
+    The model stores the validation status, rule identifier, severity level,
+    human-readable message, and recommended action.
     """
 
     is_valid: bool
