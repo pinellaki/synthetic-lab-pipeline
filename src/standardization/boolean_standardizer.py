@@ -3,9 +3,8 @@
 This module contains the BooleanStandardizer class, which converts raw
 boolean-like values from source files into real Python booleans.
 
-The standardizer is useful because raw input files may represent boolean
-values in different ways, for example "yes", "y", "true", "1", "no", "false",
-or "0".
+Raw input files may represent boolean values in different ways, for example
+"yes", "y", "true", "1", "no", "false", or "0".
 """
 
 from src.core.pipeline_constants import PipelineConstants
@@ -22,7 +21,7 @@ class BooleanStandardizer:
     - map known false values to False
     - return None for missing, empty, or unknown values
 
-    This makes boolean fields consistent before validation and database
+    This keeps boolean fields consistent before validation and database
     loading.
     """
 
