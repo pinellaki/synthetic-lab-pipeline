@@ -15,17 +15,8 @@ class AppConfig(BaseModel):
     This configuration object centralizes default project settings so they can
     be reused by ingestion, validation, database, and reporting components.
 
-    Fields:
-        app_name: Human-readable application name.
-        app_version: Current application version.
-        environment: Runtime environment, such as development, test, or
-            production.
-        raw_data_path: Folder path for raw source data.
-        staging_data_path: Folder path for intermediate staged data.
-        trusted_data_path: Folder path for cleaned and trusted data.
-        rejected_data_path: Folder path for rejected records.
-        reports_data_path: Folder path for generated reports.
-        logging_level: Default logging level used by the application.
+    The model stores the application name, version, runtime environment, data
+    folder paths, and default logging level.
     """
 
     app_name: str = "Synthetic Lab Pipeline"

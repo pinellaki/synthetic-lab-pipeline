@@ -18,15 +18,9 @@ class IngestionMetadata(BaseModel):
     This schema is attached to raw records so every record can be traced back
     to its original source.
 
-    Fields:
-        source_file: Name or path of the source file that provided the record.
-        run_id: Identifier of the ingestion run that processed the record.
-        ingested_at: Datetime when the record was ingested.
-        source_row: Row number in the source file, when available.
-        source_sheet: Sheet name for spreadsheet sources, when available.
-        source_page: Page number for PDF or paginated sources, when available.
-        source_record_index: Position of the record inside a page, payload, or
-            nested source structure, when available.
+    The model stores the source file, ingestion run ID, ingestion timestamp,
+    source row, source sheet, source page, and source record index when those
+    values are available.
     """
 
     source_file: str
