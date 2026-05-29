@@ -31,3 +31,6 @@ Thumbs.db
 # Environment files
 .env
 .env.*
+
+# Sphinx generated documentation
+docs/sphinx/_build/

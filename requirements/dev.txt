@@ -1,2 +1,5 @@
 -r base.txt
 pytest
+sphinx
+sphinx-rtd-theme
+myst-parser
