@@ -1,4 +1,4 @@
-"""Raw assay result schema.
+﻿"""Raw assay result schema.
 
 This module defines the AssayResultRaw model.
 
@@ -18,7 +18,7 @@ class AssayResultRaw(BaseModel):
     file. Most fields are optional because raw lab data can be incomplete,
     malformed, or pending review.
 
-    Attributes:
+    Fields:
         result_id: Raw unique identifier for the assay result.
         sample_id: Raw sample identifier connected to the result.
         analyte_code: Raw analyte or test code.

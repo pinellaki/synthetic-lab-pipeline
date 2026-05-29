@@ -1,4 +1,4 @@
-"""Ingestion metadata schema.
+﻿"""Ingestion metadata schema.
 
 This module defines the IngestionMetadata model.
 
@@ -18,7 +18,7 @@ class IngestionMetadata(BaseModel):
     This schema is attached to raw records so every record can be traced back
     to its original source.
 
-    Attributes:
+    Fields:
         source_file: Name or path of the source file that provided the record.
         run_id: Identifier of the ingestion run that processed the record.
         ingested_at: Datetime when the record was ingested.
