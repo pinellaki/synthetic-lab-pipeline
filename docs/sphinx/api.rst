@@ -1,6 +1,14 @@
 API Reference
 =============
 
+Application
+-----------
+
+.. automodule:: src.main
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Core
 ----
 
