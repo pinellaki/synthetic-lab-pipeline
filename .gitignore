@@ -37,3 +37,6 @@ docs/sphinx/_build/
 
 # Generated M8 rejection test output
 data/rejected/m8_rejected_records.csv
+
+# Generated M8 rejection test output
+data/rejected/m8_rejected_records.csv
