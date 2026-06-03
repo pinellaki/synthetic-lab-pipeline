@@ -6,6 +6,9 @@ This repository contains the initial project structure for the Synthetic Lab Pip
 
 ```text
 synthetic-lab-pipeline/
+├── README.md
+├── .gitignore
+│
 ├── src/
 │   ├── __init__.py
 │   ├── main.py
@@ -77,6 +80,33 @@ synthetic-lab-pipeline/
 │       ├── __init__.py
 │       ├── test_sample_submission_validator.py
 │       └── test_assay_result_validator.py
+│
+├── sql/
+│   ├── m5_database_schema.sql
+│   └── quality_checks.sql
+│
+├── docs/
+│   ├── m5_database_design.md
+│   │
+│   ├── diagrams/
+│   │   └── database/
+│   │       ├── M5_checks_database.png
+│   │       └── M5_ERD_databse.png
+│   │
+│   ├── pseudocode/
+│   │   ├── M5_database_pseudocode.md
+│   │   ├── M6_Python_Transaction_Pseudocode.md
+│   │   ├── M6_Transaction_Pseudocode.md
+│   │   └── M7_pseudocode.md
+│   │
+│   └── sphinx/
+│       ├── conf.py
+│       ├── index.rst
+│       ├── api.rst
+│       ├── _static/
+│       │   └── .gitkeep
+│       └── _templates/
+│           └── .gitkeep
 │
 └── requirements/
     ├── base.txt
