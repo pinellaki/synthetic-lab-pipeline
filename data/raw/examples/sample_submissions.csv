@@ -1,0 +1,5 @@
+sample_id,subject_id,collection_site,sample_type,collection_datetime,received_datetime,priority,consent_recorded,intake_temperature_c,operator_notes
+ smp-001 , subj-001 ,MILAN,BLOOD,2026-05-20 09:00,2026-05-20 10:00,normal,yes,4.5,valid sample
+SMP-002,SUBJ-002,TURIN,URINE,20/05/2026 11:00,20/05/2026 12:00,urgent,no,5.1,valid alternative date format
+,SUBJ-003,MILAN,BLOOD,2026-05-20 13:00,2026-05-20 14:00,normal,yes,4.8,missing sample id should be rejected
+SMP-004,,ROME,BLOOD,2026-05-20 15:00,2026-05-20 16:00,normal,true,not_a_number,missing subject id and invalid temperature

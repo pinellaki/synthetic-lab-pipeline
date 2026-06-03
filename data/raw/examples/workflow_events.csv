@@ -1,0 +1,7 @@
+event_id,sample_id,event_status,event_timestamp_raw,actor,message
+EVT-001,SMP-001,received,2026-05-20 10:05,system,Sample received by lab
+EVT-002,SMP-001,reviewed,2026-05-20 12:30,analyst_a,Assay result reviewed
+EVT-003,SMP-002,received,20/05/2026 12:05,system,Sample received by lab
+EVT-004,SMP-002,approved,20/05/2026 14:30,analyst_b,Result approved
+EVT-005,SMP-999,received,2026-05-20 15:00,system,Workflow event for unknown sample
+EVT-006,,completed,2026-05-20 16:00,system,Missing sample id should be rejected later

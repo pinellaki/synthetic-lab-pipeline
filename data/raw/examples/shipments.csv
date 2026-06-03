@@ -1,0 +1,6 @@
+shipment_id,sample_id,courier,shipped_at_raw,received_at_raw,condition_temp_c_raw,status,api_updated_at_raw
+SHIP-001,SMP-001,DHL,2026-05-20 08:00,2026-05-20 10:00,4.2,delivered,2026-05-20 10:30
+SHIP-002,SMP-002,UPS,20/05/2026 09:00,20/05/2026 12:00,5.0,delivered,20/05/2026 12:30
+SHIP-003,SMP-999,DHL,2026-05-20 11:00,2026-05-20 14:00,4.8,delivered,2026-05-20 14:30
+SHIP-004,,FedEx,2026-05-20 12:00,2026-05-20 15:00,not_a_number,delivered,2026-05-20 15:30
+SHIP-005,SMP-004,DHL,2026-05-20 13:00,,7.5,in_transit,2026-05-20 13:30

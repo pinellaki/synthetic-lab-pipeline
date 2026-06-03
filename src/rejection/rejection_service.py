@@ -6,7 +6,7 @@ The service creates rejected-record objects from validation failures and
 delegates writing rejected records to the RejectedRecordWriter.
 """
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from src.rejection.rejected_record import RejectedRecord
 from src.rejection.rejected_record_writer import RejectedRecordWriter
@@ -69,7 +69,7 @@ class RejectionService:
             rule_id=validation_result.rule_id or "UNKNOWN",
             severity=validation_result.severity or "unknown",
             rejection_reason=validation_result.message or "No rejection reason provided.",
-            rejected_at=datetime.utcnow(),
+            rejected_at=datetime.now(UTC),
             run_id=run_id,
             source_row=source_row,
             source_sheet=source_sheet,
