@@ -1,0 +1,6 @@
+result_id,sample_id,analyte_code,result_value_raw,unit_raw,run_datetime_raw,instrument_id,analyst,qc_status,review_status,approved_at_raw,version,is_current_raw,deleted_at_raw
+RES-001, smp-001 ,GLU,95,mg_dl,2026-05-20 11:00,INST-01,analyst_a,PASS,approved,2026-05-20 12:00,1,yes,
+RES-002,SMP-002,CREA,1.1,mg/dl,20/05/2026 13:00,INST-02,analyst_b,PASS,approved,20/05/2026 14:00,1,true,
+RES-003,SMP-001,ALT,-5,U/L,2026-05-20 15:00,INST-01,analyst_a,FAIL,review,,1,no,
+RES-004,SMP-999,GLU,not_a_number,mg/dL,2026-05-20 16:00,INST-03,analyst_c,REVIEW,pending,,1,yes,
+,SMP-002,CREA,1.3,mg/dL,2026-05-20 17:00,INST-02,analyst_b,PASS,approved,2026-05-20 18:00,1,yes,
