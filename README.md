@@ -38,6 +38,15 @@ synthetic-lab-pipeline/
 │   │   ├── pdf_report_reader.py
 │   │   └── ingestion_service.py
 │   │
+│   ├── pipeline/
+│   │   ├── __init__.py
+│   │   ├── sample_data_smoke_test.py
+│   │   ├── sample_data_schema_test.py
+│   │   ├── sample_data_standardization_test.py
+│   │   ├── sample_data_validation_test.py
+│   │   ├── sample_data_rejection_test.py
+│   │   └── run_m8_sample_pipeline.py
+│   │
 │   ├── standardization/
 │   │   ├── __init__.py
 │   │   ├── sample_id_standardizer.py
@@ -80,6 +89,24 @@ synthetic-lab-pipeline/
 │       ├── __init__.py
 │       ├── test_sample_submission_validator.py
 │       └── test_assay_result_validator.py
+│
+├── data/
+│   ├── raw/
+│   │   ├── examples/
+│   │   │   ├── sample_submissions.csv
+│   │   │   ├── assay_results.csv
+│   │   │   ├── shipments.csv
+│   │   │   └── workflow_events.csv
+│   │   ├── api_pages/
+│   │   ├── pdf_reports/
+│   │   └── text_reports/
+│   │
+│   ├── rejected/
+│   │   └── .gitkeep
+│   │
+│   ├── reports/
+│   ├── staging/
+│   └── trusted/
 │
 ├── sql/
 │   ├── m5_database_schema.sql
