@@ -6,14 +6,14 @@ The application exposes:
 
 - a basic health-check endpoint
 - M8 fake-data pipeline documentation endpoints
+- read-only PostgreSQL endpoints for the governance dashboard
 
-The M8 endpoints are included so FastAPI can automatically generate API
-documentation that shows the available routes, response schemas, and pipeline
-summaries.
+FastAPI automatically generates interactive API documentation at ``/docs``.
 """
 
 from fastapi import FastAPI
 
+from src.api.dashboard_routes import router as dashboard_router
 from src.api.m8_routes import router as m8_router
 from src.core.app_config import AppConfig
 
@@ -25,12 +25,13 @@ app = FastAPI(
     version=config.app_version,
     description=(
         "Synthetic Lab Pipeline API. "
-        "This API exposes health-check information and M8 fake-data pipeline "
-        "documentation endpoints."
+        "The API exposes M8 fake-data pipeline documentation and read-only "
+        "PostgreSQL endpoints for the governance dashboard."
     ),
 )
 
 app.include_router(m8_router)
+app.include_router(dashboard_router)
 
 
 @app.get(
