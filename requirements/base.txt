@@ -4,3 +4,5 @@ pydantic
 pandas
 openpyxl
 pypdf
+psycopg[binary]
+python-dotenv
