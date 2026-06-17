@@ -10,23 +10,25 @@ synthetic-lab-pipeline/
 ├── .gitignore
 │
 ├── src/
-│   ├── **init**.py
+│   ├── __init__.py
 │   ├── main.py
 │   │
 │   ├── api/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── m8_schemas.py
-│   │   └── m8_routes.py
+│   │   ├── m8_routes.py
+│   │   ├── dashboard_schemas.py
+│   │   └── dashboard_routes.py
 │   │
 │   ├── core/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── app_config.py
 │   │   ├── pipeline_constants.py
 │   │   ├── pipeline_exception.py
 │   │   └── logging_config.py
 │   │
 │   ├── schemas/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── ingestion_metadata.py
 │   │   ├── sample_submission_raw.py
 │   │   ├── assay_result_raw.py
@@ -35,7 +37,7 @@ synthetic-lab-pipeline/
 │   │   └── validation_result.py
 │   │
 │   ├── ingestion/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── csv_reader.py
 │   │   ├── excel_reader.py
 │   │   ├── json_page_reader.py
@@ -44,7 +46,7 @@ synthetic-lab-pipeline/
 │   │   └── ingestion_service.py
 │   │
 │   ├── pipeline/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── sample_data_smoke_test.py
 │   │   ├── sample_data_schema_test.py
 │   │   ├── sample_data_standardization_test.py
@@ -53,26 +55,26 @@ synthetic-lab-pipeline/
 │   │   └── run_m8_sample_pipeline.py
 │   │
 │   ├── standardization/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── sample_id_standardizer.py
 │   │   ├── boolean_standardizer.py
 │   │   ├── unit_standardizer.py
 │   │   └── date_standardizer.py
 │   │
 │   ├── validation/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── sample_submission_validator.py
 │   │   ├── assay_result_validator.py
 │   │   └── validation_service.py
 │   │
 │   ├── rejection/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── rejected_record.py
 │   │   ├── rejected_record_writer.py
 │   │   └── rejection_service.py
 │   │
 │   ├── database/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── database_config.py
 │   │   ├── database_service.py
 │   │   ├── postgres_audit_row_builder.py
@@ -83,22 +85,26 @@ synthetic-lab-pipeline/
 │   │   ├── postgres_row_builder.py
 │   │   └── run_postgres_one_time_load.py
 │   │
+│   ├── dashboard/
+│   │   ├── __init__.py
+│   │   └── app.py
+│   │
 │   └── features/
-│       ├── **init**.py
+│       ├── __init__.py
 │       ├── feature_table_builder.py
 │       └── leakage_checker.py
 │
 ├── tests/
-│   ├── **init**.py
+│   ├── __init__.py
 │   ├── standardization/
-│   │   ├── **init**.py
+│   │   ├── __init__.py
 │   │   ├── test_sample_id_standardizer.py
 │   │   ├── test_boolean_standardizer.py
 │   │   ├── test_unit_standardizer.py
 │   │   └── test_date_standardizer.py
 │   │
 │   └── validation/
-│       ├── **init**.py
+│       ├── __init__.py
 │       ├── test_sample_submission_validator.py
 │       └── test_assay_result_validator.py
 │
@@ -122,7 +128,8 @@ synthetic-lab-pipeline/
 │
 ├── sql/
 │   ├── m5_database_schema.sql
-│   └── quality_checks.sql
+│   ├── quality_checks.sql
+│   └── m10_add_rejection_resolution_fields.sql
 │
 ├── docs/
 │   ├── m5_database_design.md
@@ -150,9 +157,9 @@ synthetic-lab-pipeline/
 │           └── .gitkeep
 │
 └── requirements/
-├── base.txt
-├── dev.txt
-└── prod.txt
+    ├── base.txt
+    ├── dev.txt
+    └── prod.txt
 ```
 
 ## Folder Responsibilities
