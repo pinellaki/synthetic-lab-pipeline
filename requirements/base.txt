@@ -6,3 +6,6 @@ openpyxl
 pypdf
 psycopg[binary]
 python-dotenv
+streamlit
+plotly
+requests
