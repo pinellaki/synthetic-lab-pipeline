@@ -129,7 +129,8 @@ synthetic-lab-pipeline/
 ├── sql/
 │   ├── m5_database_schema.sql
 │   ├── quality_checks.sql
-│   └── m10_add_rejection_resolution_fields.sql
+│   ├──  m10_add_rejection_resolution_fields.sql
+│   └── m11_add_source_document_tracking.sql
 │
 ├── docs/
 │   ├── m5_database_design.md
@@ -485,3 +486,12 @@ Expected result:
 ```text
 build succeeded
 ```
+
+### Load raw source-document metadata
+
+The dashboard also tracks raw files and reports that entered the project, including CSV files, Excel files, API JSON pages, PDF reports, and text reports.
+
+First apply the source-document tracking migration:
+
+```powershell
+psql -U postgres -d synthetic_lab_pipeline -f sql\m11_add_source_document_tracking.sql

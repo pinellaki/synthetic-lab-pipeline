@@ -1,3 +1,4 @@
+from datetime import datetime
 from decimal import Decimal
 
 from fastapi.testclient import TestClient
@@ -126,10 +127,115 @@ def test_dashboard_resolution_status_endpoint(monkeypatch):
     ]
 
 
+def test_dashboard_source_document_summary_endpoint(monkeypatch):
+    def fake_execute_query(query, params=None):
+        return [
+            {
+                "source_type": "API_JSON",
+                "ingestion_status": "processed",
+                "file_count": 3,
+                "total_records_detected": 121,
+            },
+            {
+                "source_type": "PDF_REPORT",
+                "ingestion_status": "detected_only",
+                "file_count": 6,
+                "total_records_detected": 6,
+            },
+            {
+                "source_type": "TEXT_REPORT",
+                "ingestion_status": "detected_only",
+                "file_count": 12,
+                "total_records_detected": 120,
+            },
+        ]
+
+    monkeypatch.setattr(dashboard_routes, "execute_query", fake_execute_query)
+
+    response = client.get("/dashboard/source-document-summary")
+
+    assert response.status_code == 200
+    assert response.json() == [
+        {
+            "source_type": "API_JSON",
+            "ingestion_status": "processed",
+            "file_count": 3,
+            "total_records_detected": 121,
+        },
+        {
+            "source_type": "PDF_REPORT",
+            "ingestion_status": "detected_only",
+            "file_count": 6,
+            "total_records_detected": 6,
+        },
+        {
+            "source_type": "TEXT_REPORT",
+            "ingestion_status": "detected_only",
+            "file_count": 12,
+            "total_records_detected": 120,
+        },
+    ]
+
+
+def test_dashboard_source_documents_endpoint(monkeypatch):
+    source_timestamp = datetime(2026, 6, 22, 13, 40, 37, 914348)
+
+    def fake_execute_query(query, params=None):
+        return [
+            {
+                "source_document_id": 1,
+                "source_path": "data/raw/api_pages/shipments_page_1.json",
+                "file_name": "shipments_page_1.json",
+                "source_type": "API_JSON",
+                "file_extension": ".json",
+                "file_size_bytes": 13509,
+                "records_detected": 45,
+                "records_loaded": None,
+                "records_rejected": None,
+                "ingestion_status": "processed",
+                "notes": (
+                    "Structured source detected. This source type can be used "
+                    "by the pipeline for loading trusted PostgreSQL tables."
+                ),
+                "ingested_at": source_timestamp,
+                "updated_at": source_timestamp,
+            }
+        ]
+
+    monkeypatch.setattr(dashboard_routes, "execute_query", fake_execute_query)
+
+    response = client.get("/dashboard/source-documents")
+
+    assert response.status_code == 200
+    assert response.json() == [
+        {
+            "source_document_id": 1,
+            "source_path": "data/raw/api_pages/shipments_page_1.json",
+            "file_name": "shipments_page_1.json",
+            "source_type": "API_JSON",
+            "file_extension": ".json",
+            "file_size_bytes": 13509,
+            "records_detected": 45,
+            "records_loaded": None,
+            "records_rejected": None,
+            "ingestion_status": "processed",
+            "notes": (
+                "Structured source detected. This source type can be used "
+                "by the pipeline for loading trusted PostgreSQL tables."
+            ),
+            "ingested_at": "2026-06-22T13:40:37.914348",
+            "updated_at": "2026-06-22T13:40:37.914348",
+        }
+    ]
+
+
 def test_dashboard_lineage_endpoint(monkeypatch):
     def fake_execute_query(query, params=None):
         return [
             {
+                "source_documents": 30,
+                "pdf_reports": 6,
+                "text_reports": 12,
                 "input_sample_records": 4,
                 "input_assay_records": 5,
                 "accepted_samples": 2,
@@ -151,6 +257,23 @@ def test_dashboard_lineage_endpoint(monkeypatch):
     assert response.status_code == 200
     assert response.json() == [
         {
+            "stage": "Raw source files detected",
+            "record_count": 30,
+            "explanation": (
+                "CSV, Excel, API JSON, PDF, and text files detected in data/raw."
+            ),
+        },
+        {
+            "stage": "PDF reports detected",
+            "record_count": 6,
+            "explanation": "PDF reports tracked as raw source metadata.",
+        },
+        {
+            "stage": "Text reports detected",
+            "record_count": 12,
+            "explanation": "Text reports tracked as raw source metadata.",
+        },
+        {
             "stage": "Input sample records",
             "record_count": 4,
             "explanation": "Distinct sample source rows evaluated by validation.",
@@ -158,7 +281,9 @@ def test_dashboard_lineage_endpoint(monkeypatch):
         {
             "stage": "Input assay-result records",
             "record_count": 5,
-            "explanation": "Distinct assay-result source rows evaluated by validation.",
+            "explanation": (
+                "Distinct assay-result source rows evaluated by validation."
+            ),
         },
         {
             "stage": "Accepted samples",
