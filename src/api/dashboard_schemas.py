@@ -9,6 +9,7 @@ The dashboard covers:
 2. validation and rejection governance
 3. pipeline lineage
 4. rejected-record issue resolution
+5. raw source-document tracking
 """
 
 from datetime import datetime
@@ -281,6 +282,67 @@ class LineageStageMetric(BaseModel):
     )
 
 
+class SourceDocumentSummaryMetric(BaseModel):
+    """Aggregated raw source-document counts."""
+
+    source_type: str = Field(
+        description="Source type such as CSV, API_JSON, PDF_REPORT, or TEXT_REPORT."
+    )
+    ingestion_status: str = Field(
+        description="Processing status such as processed or detected_only."
+    )
+    file_count: int = Field(
+        description="Number of files in this source/status group."
+    )
+    total_records_detected: int = Field(
+        description="Total rows, records, pages, or lines detected."
+    )
+
+
+class SourceDocumentItem(BaseModel):
+    """Detailed metadata for one raw source document."""
+
+    source_document_id: int = Field(
+        description="Unique source-document metadata identifier."
+    )
+    source_path: str = Field(
+        description="Relative path of the source file inside the project."
+    )
+    file_name: str = Field(
+        description="Source file name."
+    )
+    source_type: str = Field(
+        description="Source type such as CSV, API_JSON, PDF_REPORT, or TEXT_REPORT."
+    )
+    file_extension: str | None = Field(
+        description="File extension."
+    )
+    file_size_bytes: int | None = Field(
+        description="File size in bytes."
+    )
+    records_detected: int | None = Field(
+        description="Detected rows, records, pages, or lines."
+    )
+    records_loaded: int | None = Field(
+        description="Optional count of loaded records from this source."
+    )
+    records_rejected: int | None = Field(
+        description="Optional count of rejected records from this source."
+    )
+    ingestion_status: str = Field(
+        description="Whether the source was processed, detected only, skipped, or errored."
+    )
+    notes: str | None = Field(
+        description="Governance note about how the source was handled."
+    )
+    ingested_at: datetime = Field(
+        description="Date and time when the source metadata was first loaded."
+    )
+    updated_at: datetime = Field(
+        description="Date and time when the source metadata was last updated."
+    )
+
+
 class DashboardDocumentationResponse(BaseModel):
     """Documentation information displayed by the dashboard."""
 
@@ -296,11 +358,17 @@ class DashboardDocumentationResponse(BaseModel):
     governance_area: list[str] = Field(
         description="Metrics available in the governance area."
     )
+    source_document_area: list[str] = Field(
+        description="Metrics available for raw source-document tracking."
+    )
     lineage_definition: str = Field(
         description="Explanation of data lineage in this project."
     )
     resolution_definition: str = Field(
         description="Explanation of rejected-record issue tracking."
+    )
+    source_document_definition: str = Field(
+        description="Explanation of raw file and report tracking."
     )
     data_source: str = Field(
         description="Source used by the dashboard."

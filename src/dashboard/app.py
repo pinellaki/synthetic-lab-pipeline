@@ -2,11 +2,12 @@
 
 The dashboard communicates with the existing FastAPI backend.
 
-It contains three areas:
+It contains four areas:
 
 1. accepted laboratory and business data
-2. validation, rejection, lineage, and issue-resolution governance
-3. dashboard and API documentation
+2. raw source files and reports entering the pipeline
+3. validation, rejection, lineage, and issue-resolution governance
+4. dashboard and API documentation
 
 Streamlit does not connect directly to PostgreSQL. It reads and updates data
 through FastAPI endpoints.
@@ -261,6 +262,228 @@ def show_data_overview(api_base_url: str) -> None:
         use_container_width=True,
         hide_index=True,
     )
+
+
+def show_source_document_dashboard(api_base_url: str) -> None:
+    """Render source-file and report tracking information."""
+    st.header("Source files and reports")
+
+    st.write(
+        "This area tracks the raw files that entered the project: CSV files, "
+        "Excel files, API JSON pages, PDF reports, and text reports. "
+        "It helps explain what entered the pipeline before validation, "
+        "acceptance, rejection, and dashboard visualization."
+    )
+
+    try:
+        source_summary = fetch_api_data(
+            api_base_url,
+            "/dashboard/source-document-summary",
+        )
+        source_documents = fetch_api_data(
+            api_base_url,
+            "/dashboard/source-documents",
+        )
+
+    except requests.RequestException as error:
+        show_api_error(error)
+        return
+
+    summary_dataframe = pd.DataFrame(source_summary)
+    source_dataframe = pd.DataFrame(source_documents)
+
+    if source_dataframe.empty:
+        st.info("No source-document metadata is available.")
+        return
+
+    total_files = len(source_dataframe)
+    total_detected = int(
+        source_dataframe["records_detected"]
+        .fillna(0)
+        .sum()
+    )
+    processed_files = int(
+        (source_dataframe["ingestion_status"] == "processed").sum()
+    )
+    detected_only_files = int(
+        (source_dataframe["ingestion_status"] == "detected_only").sum()
+    )
+
+    metric_columns = st.columns(4)
+
+    metric_columns[0].metric(
+        label="Raw source files",
+        value=total_files,
+    )
+    metric_columns[1].metric(
+        label="Detected rows/pages/lines",
+        value=total_detected,
+    )
+    metric_columns[2].metric(
+        label="Processed sources",
+        value=processed_files,
+    )
+    metric_columns[3].metric(
+        label="Detected-only reports",
+        value=detected_only_files,
+    )
+
+    st.divider()
+
+    st.subheader("Source files by type")
+
+    if summary_dataframe.empty:
+        st.info("No source-document summary information is available.")
+    else:
+        source_type_chart = px.bar(
+            summary_dataframe,
+            x="source_type",
+            y="file_count",
+            color="ingestion_status",
+            barmode="group",
+            hover_data=[
+                "total_records_detected",
+            ],
+            labels={
+                "source_type": "Source type",
+                "file_count": "File count",
+                "ingestion_status": "Ingestion status",
+                "total_records_detected": "Detected rows/pages/lines",
+            },
+            title="Raw source files grouped by type and status",
+        )
+
+        st.plotly_chart(
+            source_type_chart,
+            use_container_width=True,
+        )
+
+        detected_count_chart = px.bar(
+            summary_dataframe,
+            x="source_type",
+            y="total_records_detected",
+            color="ingestion_status",
+            barmode="group",
+            labels={
+                "source_type": "Source type",
+                "total_records_detected": "Detected rows/pages/lines",
+                "ingestion_status": "Ingestion status",
+            },
+            title="Detected rows, records, pages, or lines by source type",
+        )
+
+        st.plotly_chart(
+            detected_count_chart,
+            use_container_width=True,
+        )
+
+        st.dataframe(
+            summary_dataframe,
+            use_container_width=True,
+            hide_index=True,
+        )
+
+    st.divider()
+
+    st.subheader("Source-document details")
+
+    filter_columns = st.columns(2)
+
+    available_source_types = sorted(
+        source_dataframe["source_type"]
+        .dropna()
+        .astype(str)
+        .unique()
+        .tolist()
+    )
+
+    available_statuses = sorted(
+        source_dataframe["ingestion_status"]
+        .dropna()
+        .astype(str)
+        .unique()
+        .tolist()
+    )
+
+    selected_source_types = filter_columns[0].multiselect(
+        "Filter by source type",
+        options=available_source_types,
+        default=available_source_types,
+    )
+
+    selected_statuses = filter_columns[1].multiselect(
+        "Filter by ingestion status",
+        options=available_statuses,
+        default=available_statuses,
+    )
+
+    filtered_sources = source_dataframe.copy()
+
+    if selected_source_types:
+        filtered_sources = filtered_sources[
+            filtered_sources["source_type"].isin(selected_source_types)
+        ]
+    else:
+        filtered_sources = filtered_sources.iloc[0:0]
+
+    if selected_statuses:
+        filtered_sources = filtered_sources[
+            filtered_sources["ingestion_status"].isin(selected_statuses)
+        ]
+    else:
+        filtered_sources = filtered_sources.iloc[0:0]
+
+    visible_columns = [
+        "source_path",
+        "file_name",
+        "source_type",
+        "file_extension",
+        "file_size_bytes",
+        "records_detected",
+        "records_loaded",
+        "records_rejected",
+        "ingestion_status",
+        "notes",
+    ]
+
+    st.dataframe(
+        filtered_sources[visible_columns],
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    st.caption(
+        "CSV, Excel, and API JSON files are marked as processed. "
+        "PDF and text reports are currently tracked as detected-only "
+        "source metadata, because their content is not loaded into trusted "
+        "domain tables by the one-time loader."
+    )
+
+    report_dataframe = source_dataframe[
+        source_dataframe["source_type"].isin(
+            [
+                "PDF_REPORT",
+                "TEXT_REPORT",
+            ]
+        )
+    ]
+
+    if not report_dataframe.empty:
+        with st.expander("View PDF and text reports only"):
+            st.dataframe(
+                report_dataframe[
+                    [
+                        "source_path",
+                        "file_name",
+                        "source_type",
+                        "records_detected",
+                        "ingestion_status",
+                        "notes",
+                    ]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
 
 
 def show_validation_rule_section(
@@ -749,7 +972,7 @@ def show_documentation(api_base_url: str) -> None:
 
     st.info(f'Data source: {documentation["data_source"]}')
 
-    first_column, second_column = st.columns(2)
+    first_column, second_column, third_column = st.columns(3)
 
     with first_column:
         st.markdown("### Laboratory-data area")
@@ -758,6 +981,12 @@ def show_documentation(api_base_url: str) -> None:
             st.markdown(f"- {item}")
 
     with second_column:
+        st.markdown("### Source-document area")
+
+        for item in documentation["source_document_area"]:
+            st.markdown(f"- {item}")
+
+    with third_column:
         st.markdown("### Governance area")
 
         for item in documentation["governance_area"]:
@@ -767,6 +996,10 @@ def show_documentation(api_base_url: str) -> None:
 
     st.write(documentation["lineage_definition"])
 
+    st.markdown("### What source-document tracking means")
+
+    st.write(documentation["source_document_definition"])
+
     st.markdown("### What issue-resolution tracking means")
 
     st.write(documentation["resolution_definition"])
@@ -775,6 +1008,8 @@ def show_documentation(api_base_url: str) -> None:
 
     st.code(
         """
+Raw source files and reports
+        ↓
 PostgreSQL database
         ↓
 FastAPI dashboard endpoints
@@ -802,6 +1037,16 @@ Plotly charts, filters, details, and issue updates
             "Method": "GET",
             "Endpoint": "/dashboard/samples",
             "Purpose": "Accepted sample-level details",
+        },
+        {
+            "Method": "GET",
+            "Endpoint": "/dashboard/source-document-summary",
+            "Purpose": "Raw source files grouped by type and status",
+        },
+        {
+            "Method": "GET",
+            "Endpoint": "/dashboard/source-documents",
+            "Purpose": "Detailed raw source-file and report metadata",
         },
         {
             "Method": "GET",
@@ -855,8 +1100,9 @@ def main() -> None:
     st.title("Synthetic Lab Pipeline Governance Dashboard")
 
     st.caption(
-        "Visualization of accepted laboratory data, validation outcomes, "
-        "rejected records, issue resolution, and pipeline lineage."
+        "Visualization of raw source files, accepted laboratory data, "
+        "validation outcomes, rejected records, issue resolution, and "
+        "pipeline lineage."
     )
 
     with st.sidebar:
@@ -889,9 +1135,15 @@ def main() -> None:
             """
         )
 
-    data_tab, governance_tab, documentation_tab = st.tabs(
+    (
+        data_tab,
+        source_documents_tab,
+        governance_tab,
+        documentation_tab,
+    ) = st.tabs(
         [
             "Laboratory data",
+            "Source files and reports",
             "Governance and lineage",
             "Documentation",
         ]
@@ -899,6 +1151,9 @@ def main() -> None:
 
     with data_tab:
         show_data_overview(api_base_url)
+
+    with source_documents_tab:
+        show_source_document_dashboard(api_base_url)
 
     with governance_tab:
         show_governance_dashboard(api_base_url)

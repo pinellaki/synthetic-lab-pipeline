@@ -1,7 +1,7 @@
 """FastAPI routes for the Synthetic Lab Pipeline governance dashboard.
 
-The endpoints retrieve laboratory, validation, rejection, lineage, and
-issue-resolution information from PostgreSQL.
+The endpoints retrieve laboratory, validation, rejection, lineage,
+source-document, and issue-resolution information from PostgreSQL.
 
 Most routes are read-only. One PATCH endpoint allows a rejected-record issue
 to be marked as open, corrected, resolved, or dismissed.
@@ -23,6 +23,8 @@ from src.api.dashboard_schemas import (
     RejectedRecordResolutionUpdate,
     ResolutionStatusMetric,
     SampleSummaryItem,
+    SourceDocumentItem,
+    SourceDocumentSummaryMetric,
     ValidationRuleMetric,
     ValidationSeverityMetric,
 )
@@ -446,6 +448,85 @@ def get_resolution_status_metrics() -> list[ResolutionStatusMetric]:
     ]
 
 
+@router.get(
+    "/source-document-summary",
+    response_model=list[SourceDocumentSummaryMetric],
+    summary="Return raw source-document summary metrics",
+)
+def get_source_document_summary() -> list[SourceDocumentSummaryMetric]:
+    """Return file counts and detected record counts by source type."""
+    rows = execute_query(
+        """
+        SELECT
+            source_type,
+            ingestion_status,
+            COUNT(*) AS file_count,
+            COALESCE(SUM(records_detected), 0) AS total_records_detected
+        FROM source_document
+        GROUP BY source_type, ingestion_status
+        ORDER BY source_type, ingestion_status
+        """
+    )
+
+    return [
+        SourceDocumentSummaryMetric(
+            source_type=row["source_type"],
+            ingestion_status=row["ingestion_status"],
+            file_count=int(row["file_count"]),
+            total_records_detected=int(row["total_records_detected"]),
+        )
+        for row in rows
+    ]
+
+
+@router.get(
+    "/source-documents",
+    response_model=list[SourceDocumentItem],
+    summary="Return detailed raw source-document metadata",
+)
+def get_source_documents() -> list[SourceDocumentItem]:
+    """Return raw files and reports detected by the source-document loader."""
+    rows = execute_query(
+        """
+        SELECT
+            source_document_id,
+            source_path,
+            file_name,
+            source_type,
+            file_extension,
+            file_size_bytes,
+            records_detected,
+            records_loaded,
+            records_rejected,
+            ingestion_status,
+            notes,
+            ingested_at,
+            updated_at
+        FROM source_document
+        ORDER BY source_type, source_path
+        """
+    )
+
+    return [
+        SourceDocumentItem(
+            source_document_id=int(row["source_document_id"]),
+            source_path=row["source_path"],
+            file_name=row["file_name"],
+            source_type=row["source_type"],
+            file_extension=row["file_extension"],
+            file_size_bytes=row["file_size_bytes"],
+            records_detected=row["records_detected"],
+            records_loaded=row["records_loaded"],
+            records_rejected=row["records_rejected"],
+            ingestion_status=row["ingestion_status"],
+            notes=row["notes"],
+            ingested_at=row["ingested_at"],
+            updated_at=row["updated_at"],
+        )
+        for row in rows
+    ]
+
+
 @router.patch(
     "/rejected-records/{rejected_record_id}/resolution",
     response_model=RejectedRecordResolutionResponse,
@@ -474,6 +555,23 @@ def get_lineage_metrics() -> list[LineageStageMetric]:
     rows = execute_query(
         """
         SELECT
+            (
+                SELECT COUNT(*)
+                FROM source_document
+            ) AS source_documents,
+
+            (
+                SELECT COUNT(*)
+                FROM source_document
+                WHERE source_type = 'PDF_REPORT'
+            ) AS pdf_reports,
+
+            (
+                SELECT COUNT(*)
+                FROM source_document
+                WHERE source_type = 'TEXT_REPORT'
+            ) AS text_reports,
+
             (
                 SELECT COUNT(DISTINCT source_row)
                 FROM validation_result
@@ -533,6 +631,27 @@ def get_lineage_metrics() -> list[LineageStageMetric]:
     row = rows[0]
 
     return [
+        LineageStageMetric(
+            stage="Raw source files detected",
+            record_count=int(row["source_documents"]),
+            explanation=(
+                "CSV, Excel, API JSON, PDF, and text files detected in data/raw."
+            ),
+        ),
+        LineageStageMetric(
+            stage="PDF reports detected",
+            record_count=int(row["pdf_reports"]),
+            explanation=(
+                "PDF reports tracked as raw source metadata."
+            ),
+        ),
+        LineageStageMetric(
+            stage="Text reports detected",
+            record_count=int(row["text_reports"]),
+            explanation=(
+                "Text reports tracked as raw source metadata."
+            ),
+        ),
         LineageStageMetric(
             stage="Input sample records",
             record_count=int(row["input_sample_records"]),
@@ -614,7 +733,8 @@ def get_dashboard_documentation() -> DashboardDocumentationResponse:
         title="Synthetic Lab Pipeline Governance Dashboard",
         purpose=(
             "Visualize accepted laboratory data and monitor validation, "
-            "rejection, lineage, and issue-resolution information."
+            "rejection, lineage, source-document, and issue-resolution "
+            "information."
         ),
         data_area=[
             "Accepted sample, result, shipment, and workflow-event counts",
@@ -629,6 +749,13 @@ def get_dashboard_documentation() -> DashboardDocumentationResponse:
             "Pipeline-stage lineage counts",
             "Open, corrected, resolved, and dismissed issue tracking",
         ],
+        source_document_area=[
+            "Raw files detected inside data/raw",
+            "CSV, Excel, API JSON, PDF report, and text report counts",
+            "Rows, records, pages, or lines detected per source",
+            "Detailed file-level source metadata",
+            "Whether a source was processed or only detected for governance",
+        ],
         lineage_definition=(
             "Data lineage describes what entered the pipeline, which checks "
             "were performed, which records were accepted, and which records "
@@ -640,7 +767,14 @@ def get_dashboard_documentation() -> DashboardDocumentationResponse:
             "It can also store a corrected value, a note, the responsible "
             "person or process, and the resolution time."
         ),
+        source_document_definition=(
+            "Source-document tracking records the raw files and reports that "
+            "entered the project. Structured files such as CSV, Excel, and API "
+            "JSON pages are marked as processed. PDF and text reports are "
+            "tracked as detected-only source metadata in the current loader."
+        ),
         data_source=(
-            "Local PostgreSQL database populated by the one-time M9 loader."
+            "Local PostgreSQL database populated by the one-time M9 loader "
+            "and the M11 source-document metadata loader."
         ),
     )
