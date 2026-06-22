@@ -334,3 +334,154 @@ Initial setup work was done on the `week1-setup` branch.
 Source-code organization work was done on the `organize-src-structure` branch.
 
 M3 validation and standardization tests were added on the `m3-validation-tests` branch.
+
+## Running the PostgreSQL, FastAPI, and Streamlit dashboard flow
+
+This project includes a PostgreSQL-backed FastAPI API and a Streamlit dashboard for laboratory-data and governance monitoring.
+
+The local execution flow is:
+
+```text
+PostgreSQL database
+    ↓
+FastAPI backend
+    ↓
+Streamlit dashboard
+```
+
+### 1. Install dependencies
+
+Install the base application dependencies:
+
+```powershell
+python -m pip install -r requirements\base.txt
+```
+
+Install the development dependencies if you also want to run tests:
+
+```powershell
+python -m pip install -r requirements\dev.txt
+```
+
+### 2. Configure the local PostgreSQL connection
+
+Create a local `.env` file in the project root.
+
+Example:
+
+```env
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=synthetic_lab_pipeline
+DATABASE_USER=postgres
+DATABASE_PASSWORD=---
+```
+
+The real `.env` file is ignored by Git and must not be committed.
+
+### 3. Prepare the PostgreSQL database
+
+Create the database manually in PostgreSQL if it does not already exist:
+
+```sql
+CREATE DATABASE synthetic_lab_pipeline;
+```
+
+Then apply the base schema:
+
+```powershell
+psql -U postgres -d synthetic_lab_pipeline -f sql\m5_database_schema.sql
+```
+
+### 4. Run the one-time PostgreSQL data load
+
+The one-time loader inserts reference data, accepted records, validation results, and rejected-record audit entries.
+
+```powershell
+python -m src.database.run_postgres_one_time_load
+```
+
+The loader is intentionally protected against duplicate loads. If the database already contains data, the loader stops instead of inserting duplicate records.
+
+### 5. Apply the M10 rejected-record resolution migration
+
+The M10 dashboard includes issue-resolution tracking for rejected records.
+
+Apply the migration after the base schema exists:
+
+```powershell
+psql -U postgres -d synthetic_lab_pipeline -f sql\m10_add_rejection_resolution_fields.sql
+```
+
+This adds:
+
+* `resolution_status`
+* `corrected_value`
+* `resolution_note`
+* `resolved_by`
+* `resolved_at`
+
+Existing rejected records receive the default status `open`.
+
+### 6. Start the FastAPI backend
+
+Run FastAPI from the project root:
+
+```powershell
+python -m uvicorn src.main:app --reload
+```
+
+Open the automatic API documentation:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+The API documentation includes:
+
+* M8 fake-data pipeline endpoints
+* M10 governance dashboard endpoints
+
+### 7. Start the Streamlit dashboard
+
+Open a second PowerShell window and run:
+
+```powershell
+python -m streamlit run src\dashboard\app.py
+```
+
+Open the dashboard:
+
+```text
+http://localhost:8501
+```
+
+The dashboard includes three areas:
+
+* Laboratory data
+* Governance and lineage
+* Documentation
+
+### 8. Run automated tests
+
+```powershell
+python -m pytest tests
+```
+
+Expected result:
+
+```text
+49 passed
+```
+
+### 9. Build Sphinx documentation
+
+```powershell
+python -m sphinx -b html docs\sphinx docs\sphinx\_build\html
+```
+
+Expected result:
+
+```text
+build succeeded
+```
